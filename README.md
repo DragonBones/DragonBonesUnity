@@ -6,7 +6,7 @@ DragonBones Library Unity version
 =======================
 DragonBones: C#版DragonBones实现  
 Com: 某些DragonBones需要的辅助类的C#实现，例如Event, Matrix, JSON等。  
-BirdAndCentaurDemo: 一个Untiy3D项目, 演示了DragonBones骨骼动画在Unity3D下的播放。   
+BirdAndCentaurDemo: 一个Untiy3D 4.3项目, 演示了DragonBones骨骼动画在Unity3D下的播放。   
 
 源码结构：
 =======================
