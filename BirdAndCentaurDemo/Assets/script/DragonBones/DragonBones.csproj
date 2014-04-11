@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{19F16A9D-D7D6-40DE-97EF-F71A8781575D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DragonBones</RootNamespace>
+    <AssemblyName>DragonBones</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\..\..\..\..\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Armature.cs" />
+    <Compile Include="animation\Animation.cs" />
+    <Compile Include="animation\AnimationState.cs" />
+    <Compile Include="animation\IAnimatable.cs" />
+    <Compile Include="animation\TimelineState.cs" />
+    <Compile Include="animation\WorldClock.cs" />
+    <Compile Include="core\DBObject.cs" />
+    <Compile Include="core\DragonBones.cs" />
+    <Compile Include="events\AnimationEvent.cs" />
+    <Compile Include="events\ArmatureEvent.cs" />
+    <Compile Include="events\FrameEvent.cs" />
+    <Compile Include="events\SoundEvent.cs" />
+    <Compile Include="managers\SoundEventManager.cs" />
+    <Compile Include="Bone.cs" />
+    <Compile Include="Slot.cs" />
+    <Compile Include="objects\AnimationData.cs" />
+    <Compile Include="objects\ArmatureData.cs" />
+    <Compile Include="objects\BoneData.cs" />
+    <Compile Include="objects\DataParser.cs" />
+    <Compile Include="objects\DBTransform.cs" />
+    <Compile Include="objects\DisplayData.cs" />
+    <Compile Include="objects\Frame.cs" />
+    <Compile Include="objects\ObjectDataParser.cs" />
+    <Compile Include="objects\SkeletonData.cs" />
+    <Compile Include="objects\SkinData.cs" />
+    <Compile Include="objects\SlotData.cs" />
+    <Compile Include="objects\TimeLine.cs" />
+    <Compile Include="objects\TransformFrame.cs" />
+    <Compile Include="objects\TransformTimeline.cs" />
+    <Compile Include="objects\XMLDataParser.cs" />
+    <Compile Include="utils\BytesType.cs" />
+    <Compile Include="utils\ConstantValues.cs" />
+    <Compile Include="utils\DBDataUtil.cs" />
+    <Compile Include="utils\parseOldXMLData.cs" />
+    <Compile Include="utils\TransformUtil.cs" />
+    <Compile Include="com\viperstudio\events\EventDispatcher.cs" />
+    <Compile Include="com\viperstudio\events\Event.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="core\" />
+    <Folder Include="animation\" />
+    <Folder Include="objects\" />
+    <Folder Include="utils\" />
+    <Folder Include="events\" />
+    <Folder Include="managers\" />
+    <Folder Include="com\" />
+    <Folder Include="com\viperstudio\" />
+    <Folder Include="com\viperstudio\events\" />
+  </ItemGroup>
+</Project>
