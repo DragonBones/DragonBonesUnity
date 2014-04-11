@@ -38,7 +38,7 @@ namespace DragonBones.Animation
 			
 			if(_pool.IndexOf(animationState) < 0)
 			{
-				_pool[_pool.Count] = animationState;
+				_pool.Add(animationState);
 			}
 		}
 		
@@ -651,10 +651,20 @@ namespace DragonBones.Animation
 			_currentFrame = null;
 			_clip = null;
 			_mixingTransforms = null;
+
+			String[] keys = new string[_timelineStates.Count];
+			int i = 0;
 			
 			foreach(KeyValuePair<string, TimelineState> timelineState in _timelineStates)
 			{
-				removeTimelineState(timelineState.Key);
+				keys[i] = timelineState.Key;
+				i++;
+				//removeTimelineState(timelineState.Key);
+			}
+
+			for(int j=0;j<keys.Length;j++)
+			{
+				removeTimelineState(keys[j]);
 			}
 		}
 	}
