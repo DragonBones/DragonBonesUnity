@@ -39,7 +39,7 @@ namespace DragonBones.Animation
 		{
 			if(_pool.IndexOf(timeline) < 0)
 			{
-				_pool[_pool.Count] = timeline;
+				_pool.Add(timeline);
 			}
 			
 			timeline.clearVaribles();
