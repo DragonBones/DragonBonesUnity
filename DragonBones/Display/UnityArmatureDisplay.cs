@@ -45,6 +45,7 @@ namespace DragonBones.Display
 		public void UpdateDisplay(List<Slot> slotList)
 		{
 			//TODO:submeshes clear then update
+
 			mesh.Clear();
 
 			int vertexIndex = 0;
@@ -63,10 +64,10 @@ namespace DragonBones.Display
 				vertexIndex = i * 4;
 				triangleIndex  = -(i +1) * 6;
 
-				vertices[vertexIndex] = new Vector3(slotVertices[0]/100, slotVertices[1]/100, 0);
-				vertices[vertexIndex + 1] = new Vector3(slotVertices[2]/100, slotVertices[3]/100, 0);
-				vertices[vertexIndex + 2] = new Vector3(slotVertices[4]/100, slotVertices[5]/100, 0);
-				vertices[vertexIndex + 3] = new Vector3(slotVertices[6]/100, slotVertices[7]/100, 0);
+                vertices[vertexIndex] = new Vector3(slotVertices[0] / 100, slotVertices[1] / 100, -slot.ZOrder * 0.001f);  // 2d mode, z more bigger more bottom
+                vertices[vertexIndex + 1] = new Vector3(slotVertices[2] / 100, slotVertices[3] / 100, -slot.ZOrder * 0.001f);
+                vertices[vertexIndex + 2] = new Vector3(slotVertices[4] / 100, slotVertices[5] / 100, -slot.ZOrder * 0.001f);
+                vertices[vertexIndex + 3] = new Vector3(slotVertices[6] / 100, slotVertices[7] / 100, -slot.ZOrder * 0.001f);
 					
 				uvs[vertexIndex] = new Vector2(slotUVs[0], slotUVs[1]);
 				uvs[vertexIndex + 1] = new Vector2(slotUVs[2], slotUVs[3]);

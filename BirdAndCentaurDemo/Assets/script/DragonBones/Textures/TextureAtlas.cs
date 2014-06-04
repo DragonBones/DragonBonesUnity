@@ -13,33 +13,33 @@ using DragonBones.Objects;
 
 namespace DragonBones.Textures
 {
-	public class TextureAtlas
-	{
-		public string Name;
-		public Texture Texture;
-		public AtlasData AtlasData;
-		public Material Material;
+    public class TextureAtlas
+    {
+        public string Name;
+        public Texture Texture;
+        public AtlasData AtlasData;
+        public Material Material;
 
-		public TextureAtlas (Texture texture, AtlasData atlasData)
-		{
-			Name = atlasData.Name;
-			Texture = texture;
-			AtlasData = atlasData;
+        public TextureAtlas(Texture texture, AtlasData atlasData)
+        {
+            Name = atlasData.Name;
+            Texture = texture;
+            AtlasData = atlasData;
 
-			Shader shader = Shader.Find("Sprites/Default");
-			Material = new Material(shader);
-			Material.mainTexture = texture;
-		}
+            Shader shader = Shader.Find("Transparent/Depth Ordered Unlit");
+            Material = new Material(shader);
+            Material.mainTexture = texture;
+        }
 
-		public System.Object GetRegion(string name)
-		{
+        public System.Object GetRegion(string name)
+        {
 
-			return null;
-		}
+            return null;
+        }
 
-		public void Dispose()
-		{
-				}
-	}
+        public void Dispose()
+        {
+        }
+    }
 }
 
