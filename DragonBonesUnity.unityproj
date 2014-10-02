@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1BCFE581-7C45-4987-B64D-0A67A92E5F0E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>DragonBonesUnity</RootNamespace>
+    <UsePartialTypes>False</UsePartialTypes>
+    <AssemblyName>DragonBonesUnity</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants />
+    <ErrorReport>prompt</ErrorReport>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants />
+    <ErrorReport>prompt</ErrorReport>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BirdAndCentaurDemo\" />
+    <Folder Include="Com\" />
+    <Folder Include="DragonBones\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BirdAndCentaurDemo\Assembly-CSharp-vs.csproj" />
+    <None Include="BirdAndCentaurDemo\Assembly-CSharp.csproj" />
+    <None Include="BirdAndCentaurDemo\BirdAndCentaurDemo-csharp.sln" />
+    <None Include="BirdAndCentaurDemo\BirdAndCentaurDemo.sln" />
+    <None Include="BirdAndCentaurDemo\BirdAndCentaurDemo.userprefs" />
+    <None Include="BirdAndCentaurDemo\Assets\New Terrain.asset" />
+    <None Include="BirdAndCentaurDemo\Assets\New Terrain.asset.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\Resources.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\demo.unity" />
+    <None Include="BirdAndCentaurDemo\Assets\demo.unity.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\Resources\skeleton.json.txt" />
+    <None Include="BirdAndCentaurDemo\Assets\Resources\skeleton.json.txt.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\Resources\texture.json.txt" />
+    <None Include="BirdAndCentaurDemo\Assets\Resources\texture.json.txt.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\Resources\texture.png" />
+    <None Include="BirdAndCentaurDemo\Assets\Resources\texture.png.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\CharactorManager.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\CharactorManager.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Events.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Geom.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Utils.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Events\Event.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Events\Event.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Events\EventDispatcher.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Events\EventDispatcher.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Geom\ColorTransform.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Geom\ColorTransform.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Geom\Matrix.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Geom\Matrix.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Geom\Point.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Geom\Point.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Utils\FPS.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Utils\FPS.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Utils\Json.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Utils\Json.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Utils\Logger.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Utils\Logger.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Utils\Matrix.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\Com\Viperstudio\Utils\Matrix.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Animation.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Armature.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Armature.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\AssemblyInfo.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\AssemblyInfo.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Bone.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Bone.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Core.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Display.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\DragonBones.csproj" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\DragonBones.csproj.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Events.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Factorys.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Slot.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Slot.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Textures.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Utils.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\managers.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Animation\Animation.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Animation\Animation.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Animation\AnimationState.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Animation\AnimationState.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Animation\IAnimatable.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Animation\IAnimatable.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Animation\TimelineState.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Animation\TimelineState.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Animation\WorldClock.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Animation\WorldClock.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Core\DBObject.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Core\DBObject.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Core\DragonBones.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Core\DragonBones.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Display\IDisplayBridge.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Display\IDisplayBridge.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Display\UnityArmatureDisplay.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Display\UnityArmatureDisplay.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Display\UnityBoneDisplay.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Display\UnityBoneDisplay.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Display\UnityDisplayBridge.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Display\UnityDisplayBridge.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Events\AnimationEvent.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Events\AnimationEvent.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Events\ArmatureEvent.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Events\ArmatureEvent.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Events\FrameEvent.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Events\FrameEvent.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Events\SoundEvent.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Events\SoundEvent.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Events\SoundEventManager.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Events\SoundEventManager.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Factorys\BaseFactory.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Factorys\BaseFactory.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Factorys\UnityFactory.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Factorys\UnityFactory.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\AnimationData.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\AnimationData.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\ArmatureData.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\ArmatureData.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\AtlasData.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\AtlasData.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\AtlasDataParser.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\AtlasDataParser.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\BoneData.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\BoneData.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\DBTransform.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\DBTransform.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\DataParser.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\DataParser.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\DisplayData.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\DisplayData.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\Frame.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\Frame.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\ObjectDataParser.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\ObjectDataParser.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\SkeletonData.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\SkeletonData.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\SkinData.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\SkinData.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\SlotData.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\SlotData.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\Timeline.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\Timeline.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\TransformFrame.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\TransformFrame.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\TransformTimeline.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\TransformTimeline.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\XMLDataParser.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Objects\XMLDataParser.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Textures\TextureAtlas.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Textures\TextureAtlas.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Utils\BytesType.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Utils\BytesType.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Utils\ConstValues.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Utils\ConstValues.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Utils\DBDataUtil.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Utils\DBDataUtil.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Utils\TransformUtil.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Utils\TransformUtil.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Utils\parseOldXMLData.cs" />
+    <None Include="BirdAndCentaurDemo\Assets\script\DragonBones\Utils\parseOldXMLData.cs.meta" />
+    <None Include="BirdAndCentaurDemo\Library\AnnotationManager" />
+    <None Include="BirdAndCentaurDemo\Library\AssetImportState" />
+    <None Include="BirdAndCentaurDemo\Library\AssetServerCacheV3" />
+    <None Include="BirdAndCentaurDemo\Library\AssetVersioning.db" />
+    <None Include="BirdAndCentaurDemo\Library\BuildPlayer.prefs" />
+    <None Include="BirdAndCentaurDemo\Library\BuildSettings.asset" />
+    <None Include="BirdAndCentaurDemo\Library\CurrentLayout.dwlt" />
+    <None Include="BirdAndCentaurDemo\Library\EditorUserBuildSettings.asset" />
+    <None Include="BirdAndCentaurDemo\Library\EditorUserSettings.asset" />
+    <None Include="BirdAndCentaurDemo\Library\FailedAssetImports.txt" />
+    <None Include="BirdAndCentaurDemo\Library\InspectorExpandedItems.asset" />
+    <None Include="BirdAndCentaurDemo\Library\MonoManager.asset" />
+    <None Include="BirdAndCentaurDemo\Library\ScriptMapper" />
+    <None Include="BirdAndCentaurDemo\Library\assetDatabase3" />
+    <None Include="BirdAndCentaurDemo\Library\guidmapper" />
+    <None Include="BirdAndCentaurDemo\Library\ScriptAssemblies\Assembly-CSharp.dll" />
+    <None Include="BirdAndCentaurDemo\Library\ScriptAssemblies\Assembly-CSharp.dll.mdb" />
+    <None Include="BirdAndCentaurDemo\Library\ScriptAssemblies\CompilationCompleted.txt" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\00000000000000001000000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\00000000000000002000000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\00000000000000003000000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\00000000000000004000000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\00000000000000004100000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\00000000000000005000000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\00000000000000005100000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\00000000000000006000000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\00000000000000006100000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\00000000000000007000000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\00000000000000008000000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\00000000000000009000000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\0000000000000000a000000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\0000000000000000b000000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\00\0000000000000000c000000000000000" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\07\07de5e52f394e454f98c10d4ba12d043" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\11\11a2c89a64cd546f19c24acd62d53e57" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\15\1531ec92418264f5998a58e5f5275b1f" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\19\19247a332e45147698ca9db1d820434a" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\1b\1bf3eff016299478fb0cef94fc6f31cb" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\1f\1fd70ab400f1d42a29358df80544b131" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\25\25cfd0ad5a99d4b90b96222f6a1de3d6" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\28\28b5033ddae3e410db2e0a11e3c4bfa9" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\2d\2d9bda8cfc3fb4853844742af7c50ec4" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\2d\2dddc49b5baac4b2096d88cd7bba9290" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\2e\2ecf5e0a9f277481d98c8e106aa0a36d" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\2e\2ee3acf6ef94f4174a489d6ae32e7856" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\2f\2f1df475d68a64dc38cb6c4b246734bb" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\34\344c2d05955d4493d8a00a27e37d5e46" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\35\35d4b46c8e3114253aa57477b56fd79d" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\3f\3f95f06c15bc14cdb9f2a9da82578921" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\41\41daf1e3e4c23476f95d10ab1ac6a205" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\44\441a981ffd2284067abdab163a9abdcf" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\4b\4b672d038247a44afb52e475e49fd30b" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\4e\4e8ca51167e75487897249b60e3a18f9" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\50\5011006406129491ab8b5837009b2e98" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\50\5049cc1eabedc4db3b45d11b2505d838" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\52\521e677aee0ef45a989899ee153920cb" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\53\538dbcf0a01794544ba27b4afdf1ec1f" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\53\53e4559ca35c84e93b830a30a6c16880" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\55\55719eb008d6946f0a9e62e00551b66f" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\55\55c2cc843472c44bc8672c043454a391" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\58\58ded86a8bad44181b977be33ac434a6" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\5b\5b31cd661696e4a268951f24049e6b0f" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\5d\5daa1206d78db414d96b66abd39f436d" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\63\630b6ccba3cd040d181d06104f634e4c" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\68\68b40639b19934d1ba18904db2444f81" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\6c\6cb04f0fc2154457ea1db578eeffc32c" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\6e\6e1564b09bf6e401da58fe25faf7dabb" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\6e\6e4276e6ce22e460582ca4eda984f4a6" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\6e\6e867d463928c4ef8966e21ca4adc039" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\7c\7cff93aa141234a2d9545b950006aac8" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\81\813fea7c3989c4ac3927f4305152912b" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\82\821f82b6c1f0c4d01953228c4b4e4875" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\84\844567dcf1516456eafa5e32ce1369d0" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\89\8989ec3914b054e63b4cffa797fbbccb" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\8d\8db1a093f4f874b3db5fcb80e2b31a4d" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\90\90f8f29b301704db98da97c842304ba2" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\90\90ffe0cb561794515b77cea9d1fca48c" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\96\96eb3985c5a4e46d199b1f15fa4b5bf4" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\98\98e587a4bbf054e5d8e89c2a3b5047e9" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\99\9955af53280a240caab96eb8b4bdb97c" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\9c\9c0b025ee95274ec89f4703c68dd0b93" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\a1\a1d54fcf3985b4c3691de99c9b6f9f01" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\a7\a741714bda12f4531be7766df99c1033" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\a7\a7505a3d9b0644182aa3767b3182a116" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\a7\a75ae5bb4178742edb49cd3b4786d61e" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\a7\a770d003f6e6e4f73be72add9aa626b6" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\a7\a7b70d01fa092409ca8066ac2ca9daa3" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\a7\a7c0de0d3ca634b6d9badb6e14762f31" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\ae\aedbd1d99002943c1b8653968f041ecc" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\b2\b2e004b465bad476aad12af6cea9733c" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\b6\b6959cf40779540c899e8c7432b08465" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\b7\b7eb4dc8a121c42318adf1df68d011fb" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\bc\bc4540f55e1da45a680ca7da4f4f3f6c" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\bf\bfd18a52a382242c89c1e1ebca9fd8e6" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\c1\c149daac6c6844134833d4792ffedf66" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\c1\c1cfb0a5d886c44ec92f81935ffa4589" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\c2\c211d6d674681454b8ef301e15ace68b" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\c5\c57d18e2116de45619c2e7f44c104ba0" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\c8\c87cfc71421e54851b8e41497a7a673c" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\c8\c8b0770a5a7464109b837fbec0aead54" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\d9\d98e428e5f4544bd0a5563e92ee926ae" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\df\df8c25a6921a142d780713dd331fdeb1" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\e1\e15ffb8aa44234ec28956d8f79601d2e" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\e1\e180c73e204ff42b5b8995db20fcf159" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\e2\e210561c7bf074cefb8fd1e6237199ba" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\f3\f371db3be495e4cc9aa898db05b845b5" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\fa\fa9be202116484c268b02844509277c1" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\fb\fbadbcd9f202043bfa42143de5d9c861" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\fc\fcae2c1ce94764692a9459e4c64654d8" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\fc\fccaec77acf8e43209e50c0f8c0cbe35" />
+    <None Include="BirdAndCentaurDemo\Library\metadata\fd\fdf410dead3c948398c4cef7384f96a3" />
+    <None Include="BirdAndCentaurDemo\ProjectSettings\AudioManager.asset" />
+    <None Include="BirdAndCentaurDemo\ProjectSettings\DynamicsManager.asset" />
+    <None Include="BirdAndCentaurDemo\ProjectSettings\EditorBuildSettings.asset" />
+    <None Include="BirdAndCentaurDemo\ProjectSettings\EditorSettings.asset" />
+    <None Include="BirdAndCentaurDemo\ProjectSettings\GraphicsSettings.asset" />
+    <None Include="BirdAndCentaurDemo\ProjectSettings\InputManager.asset" />
+    <None Include="BirdAndCentaurDemo\ProjectSettings\NavMeshLayers.asset" />
+    <None Include="BirdAndCentaurDemo\ProjectSettings\NetworkManager.asset" />
+    <None Include="BirdAndCentaurDemo\ProjectSettings\Physics2DSettings.asset" />
+    <None Include="BirdAndCentaurDemo\ProjectSettings\ProjectSettings.asset" />
+    <None Include="BirdAndCentaurDemo\ProjectSettings\QualitySettings.asset" />
+    <None Include="BirdAndCentaurDemo\ProjectSettings\TagManager.asset" />
+    <None Include="BirdAndCentaurDemo\ProjectSettings\TimeManager.asset" />
+    <None Include="BirdAndCentaurDemo\Temp\UnityLockfile" />
+    <None Include="BirdAndCentaurDemo\Temp\UnityTempFile-11201f19b3e194d1282821527ad855ca" />
+    <None Include="BirdAndCentaurDemo\Temp\UnityTempFile-248dfe11ca90e4318bfac4393bec2d09" />
+    <None Include="BirdAndCentaurDemo\Temp\UnityTempFile-273d708068bee443a832dcbc3e1db1c9" />
+    <None Include="BirdAndCentaurDemo\Temp\UnityTempFile-27478edffa2514c5e8132f5e81d887ca" />
+    <None Include="BirdAndCentaurDemo\Temp\UnityTempFile-32a5fc0d437bc4dd0a77f6a76ac5f6ea" />
+    <None Include="BirdAndCentaurDemo\Temp\UnityTempFile-4cb705d97f8364a9996fc2c79b224f07" />
+    <None Include="BirdAndCentaurDemo\Temp\UnityTempFile-5b62a003d059c4d10aca17403b3f4e9b" />
+    <None Include="BirdAndCentaurDemo\Temp\UnityTempFile-8bb9c702627154cbb9834085ce0dff21" />
+    <None Include="BirdAndCentaurDemo\Temp\UnityTempFile-9cb6baf4393e1474181b257c1b891819" />
+    <None Include="BirdAndCentaurDemo\Temp\UnityTempFile-9dca37f4b519a4bda9548023ba7d5ab7" />
+    <None Include="BirdAndCentaurDemo\Temp\UnityTempFile-cbe96bfd32d41455fb535497e51c7c63" />
+    <None Include="BirdAndCentaurDemo\Temp\UnityTempFile-d0aec2de2f3744846b12af1d7ad8180e" />
+    <None Include="BirdAndCentaurDemo\Temp\__EditModeScene" />
+    <None Include="Com\Viperstudio\Events\Event.cs" />
+    <None Include="Com\Viperstudio\Events\EventDispatcher.cs" />
+    <None Include="Com\Viperstudio\Geom\ColorTransform.cs" />
+    <None Include="Com\Viperstudio\Geom\Matrix.cs" />
+    <None Include="Com\Viperstudio\Geom\Point.cs" />
+    <None Include="Com\Viperstudio\Utils\FPS.cs" />
+    <None Include="Com\Viperstudio\Utils\Json.cs" />
+    <None Include="Com\Viperstudio\Utils\Logger.cs" />
+    <None Include="Com\Viperstudio\Utils\Matrix.cs" />
+    <None Include="DragonBones\.DS_Store" />
+    <None Include="DragonBones\Armature.cs" />
+    <None Include="DragonBones\AssemblyInfo.cs" />
+    <None Include="DragonBones\Bone.cs" />
+    <None Include="DragonBones\Slot.cs" />
+    <None Include="DragonBones\Animation\Animation.cs" />
+    <None Include="DragonBones\Animation\AnimationState.cs" />
+    <None Include="DragonBones\Animation\IAnimatable.cs" />
+    <None Include="DragonBones\Animation\TimelineState.cs" />
+    <None Include="DragonBones\Animation\WorldClock.cs" />
+    <None Include="DragonBones\Core\DBObject.cs" />
+    <None Include="DragonBones\Core\DragonBones.cs" />
+    <None Include="DragonBones\Display\.DS_Store" />
+    <None Include="DragonBones\Display\IDisplayBridge.cs" />
+    <None Include="DragonBones\Display\UnityArmatureDisplay.cs" />
+    <None Include="DragonBones\Display\UnityBoneDisplay.cs" />
+    <None Include="DragonBones\Display\UnityDisplayBridge.cs" />
+    <None Include="DragonBones\Events\AnimationEvent.cs" />
+    <None Include="DragonBones\Events\ArmatureEvent.cs" />
+    <None Include="DragonBones\Events\FrameEvent.cs" />
+    <None Include="DragonBones\Events\SoundEvent.cs" />
+    <None Include="DragonBones\Events\SoundEventManager.cs" />
+    <None Include="DragonBones\Factorys\BaseFactory.cs" />
+    <None Include="DragonBones\Factorys\UnityFactory.cs" />
+    <None Include="DragonBones\Objects\AnimationData.cs" />
+    <None Include="DragonBones\Objects\ArmatureData.cs" />
+    <None Include="DragonBones\Objects\AtlasData.cs" />
+    <None Include="DragonBones\Objects\AtlasDataParser.cs" />
+    <None Include="DragonBones\Objects\BoneData.cs" />
+    <None Include="DragonBones\Objects\DBTransform.cs" />
+    <None Include="DragonBones\Objects\DataParser.cs" />
+    <None Include="DragonBones\Objects\DisplayData.cs" />
+    <None Include="DragonBones\Objects\Frame.cs" />
+    <None Include="DragonBones\Objects\ObjectDataParser.cs" />
+    <None Include="DragonBones\Objects\SkeletonData.cs" />
+    <None Include="DragonBones\Objects\SkinData.cs" />
+    <None Include="DragonBones\Objects\SlotData.cs" />
+    <None Include="DragonBones\Objects\Timeline.cs" />
+    <None Include="DragonBones\Objects\TransformFrame.cs" />
+    <None Include="DragonBones\Objects\TransformTimeline.cs" />
+    <None Include="DragonBones\Objects\XMLDataParser.cs" />
+    <None Include="DragonBones\Textures\TextureAtlas.cs" />
+    <None Include="DragonBones\Utils\BytesType.cs" />
+    <None Include="DragonBones\Utils\ConstValues.cs" />
+    <None Include="DragonBones\Utils\DBDataUtil.cs" />
+    <None Include="DragonBones\Utils\TransformUtil.cs" />
+    <None Include="DragonBones\Utils\parseOldXMLData.cs" />
+  </ItemGroup>
+</Project>
