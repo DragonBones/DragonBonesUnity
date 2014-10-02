@@ -184,7 +184,8 @@ namespace DragonBones
 				}
 
 				(_display as UnityArmatureDisplay).UpdateDisplay(_slotList);
-
+				
+				/* Do not modify slot zorder, because slot map to flash layer, flash layer can not change !!!
 				if(_slotsZOrderChanged)
 				{
 					UpdateSlotsZOrder();
@@ -193,7 +194,7 @@ namespace DragonBones
 					{
 						this.DispatchEvent(new ArmatureEvent(ArmatureEvent.Z_ORDER_UPDATED));
 					}
-				}
+				}*/
 				
 				if(_eventList.Count!=0)
 				{
