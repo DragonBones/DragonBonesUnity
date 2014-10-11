@@ -1,0 +1,6 @@
+.DS_Store
+*.swp
+Thumbs.db
+Thumbs.db.meta
+*~
+uc/Library/
