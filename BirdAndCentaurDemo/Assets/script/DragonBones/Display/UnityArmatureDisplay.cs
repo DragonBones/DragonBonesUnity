@@ -26,135 +26,137 @@ namespace DragonBones.Display
     private float yMax = 0;
     private bool yMaxReady = false;
 
-    public GameObject Display {
-		
-      get { return _display; }
-      set { _display = value; }
-    }
+      public GameObject Display {
+
+          get { return _display; }
+          set { _display = value; }
+      }
 
     public UnityArmatureDisplay(TextureAtlas atlas)
-    {
-      _display = new GameObject();
-      filter = _display.AddComponent("MeshFilter") as MeshFilter;
-      _display.AddComponent("MeshRenderer");
-      mesh = new Mesh();
-      filter.sharedMesh = mesh;
-      _display.renderer.sharedMaterial = atlas.Material;
+      {
+        _display = new GameObject();
+        filter = _display.AddComponent("MeshFilter") as MeshFilter;
+        _display.AddComponent("MeshRenderer");
+        mesh = new Mesh();
+        filter.sharedMesh = mesh;
+        _display.renderer.sharedMaterial = atlas.Material;
 
-    }
+      }
 
 
     public void UpdateDisplay(List<Slot> slotList)
-    {
-      //TODO:submeshes clear then update
-      mesh.Clear();
+      {
+        //TODO:submeshes clear then update
+        mesh.Clear();
 
-      int vertexIndex = 0;
-      int triangleIndex = 0;
-      int triangleCount = slotList.Count * 6;
-      vertices = new Vector3[slotList.Count * 4];
-      uvs = new Vector2[slotList.Count * 4];
-      triangles = new int[triangleCount];
+        int vertexIndex = 0;
+        int triangleIndex = 0;
+        int triangleCount = slotList.Count * 6;
+        vertices = new Vector3[slotList.Count * 4];
+        uvs = new Vector2[slotList.Count * 4];
+        triangles = new int[triangleCount];
 
-      for (int i = 0; i < slotList.Count; i++)
-        {
+        for (int i = 0; i < slotList.Count; i++)
+          {
 
-          Slot slot = slotList[i];
-          if (!slot._isDisplayOnStage)
-            continue;
-          float[] slotVertices = (slot.Display as UnityBoneDisplay).Vetices;
-          float[] slotUVs = (slot.Display as UnityBoneDisplay).UVs;
+            Slot slot = slotList[i];
+            if (!slot._isDisplayOnStage)
+              continue;
+            float[] slotVertices = (slot.Display as UnityBoneDisplay).Vetices;
+            float[] slotUVs = (slot.Display as UnityBoneDisplay).UVs;
 
-          vertexIndex = i * 4;
-          triangleIndex = -(i + 1) * 6;
+            vertexIndex = i * 4;
+            triangleIndex = -(i + 1) * 6;
 
-          float[] ys = new float[4];
-          ys[0] = slotVertices[1] / 100;
-          ys[1] = slotVertices[3] / 100;
-          ys[2] = slotVertices[5] / 100;
-          ys[3] = slotVertices[7] / 100;
-          vertices[vertexIndex] = new Vector3(slotVertices[0] / 100, ys[0], 0);
-          vertices[vertexIndex + 1] = new Vector3(slotVertices[2] / 100, ys[1], 0);
-          vertices[vertexIndex + 2] = new Vector3(slotVertices[4] / 100, ys[2], 0);
-          vertices[vertexIndex + 3] = new Vector3(slotVertices[6] / 100, ys[3], 0);
+            float[] ys = new float[4];
+            ys[0] = slotVertices[1] / 100;
+            ys[1] = slotVertices[3] / 100;
+            ys[2] = slotVertices[5] / 100;
+            ys[3] = slotVertices[7] / 100;
+            vertices[vertexIndex] = new Vector3(slotVertices[0] / 100, ys[0], 0);
+            vertices[vertexIndex + 1] = new Vector3(slotVertices[2] / 100, ys[1], 0);
+            vertices[vertexIndex + 2] = new Vector3(slotVertices[4] / 100, ys[2], 0);
+            vertices[vertexIndex + 3] = new Vector3(slotVertices[6] / 100, ys[3], 0);
 
-          if (!yMaxReady)
-            {
-              yMax = Mathf.Max(Mathf.Max(ys), yMax);
-            }
+            if (!yMaxReady)
+              {
+                yMax = Mathf.Max(Mathf.Max(ys), yMax);
+              }
 
-          uvs[vertexIndex] = new Vector2(slotUVs[0], slotUVs[1]);
-          uvs[vertexIndex + 1] = new Vector2(slotUVs[2], slotUVs[3]);
-          uvs[vertexIndex + 2] = new Vector2(slotUVs[4], slotUVs[5]);
-          uvs[vertexIndex + 3] = new Vector2(slotUVs[6], slotUVs[7]);
+            uvs[vertexIndex] = new Vector2(slotUVs[0], slotUVs[1]);
+            uvs[vertexIndex + 1] = new Vector2(slotUVs[2], slotUVs[3]);
+            uvs[vertexIndex + 2] = new Vector2(slotUVs[4], slotUVs[5]);
+            uvs[vertexIndex + 3] = new Vector2(slotUVs[6], slotUVs[7]);
 
-          triangles[triangleCount + triangleIndex] = vertexIndex;
-          triangles[triangleCount + triangleIndex + 1] = vertexIndex + 1;
-          triangles[triangleCount + triangleIndex + 2] = vertexIndex + 2;
-          triangles[triangleCount + triangleIndex + 3] = vertexIndex + 2;
-          triangles[triangleCount + triangleIndex + 4] = vertexIndex + 3;
-          triangles[triangleCount + triangleIndex + 5] = vertexIndex + 0;
+            triangles[triangleCount + triangleIndex] = vertexIndex;
+            triangles[triangleCount + triangleIndex + 1] = vertexIndex + 1;
+            triangles[triangleCount + triangleIndex + 2] = vertexIndex + 2;
+            triangles[triangleCount + triangleIndex + 3] = vertexIndex + 2;
+            triangles[triangleCount + triangleIndex + 4] = vertexIndex + 3;
+            triangles[triangleCount + triangleIndex + 5] = vertexIndex + 0;
 
-        }
-      yMaxReady = true;
+          }
+        yMaxReady = true;
 
-      /*
-			Vector3[] normals = new Vector3[slotList.Count*4];
-			Vector3 normal = new Vector3(0, 0, -1);
-			for (int i = 0; i < slotList.Count*4; i++)
-				normals[i] = normal;
+        /*
+      Vector3[] normals = new Vector3[slotList.Count*4];
+      Vector3 normal = new Vector3(0, 0, -1);
+      for (int i = 0; i < slotList.Count*4; i++)
+        normals[i] = normal;
             */
 
-      if (colors == null)
-        {
-          colors = new Color32[vertices.Length];
-          for (int i = 0; i < colors.Length; i++)
-            {
-              byte grayScale = GrayScale(vertices[i].y);
-              Color32 color = new Color32();
-              color.a = 255;
-              color.r = grayScale;
-              color.g = grayScale;
-              color.b = grayScale;
-              colors[i] = color;
-            }
-        }
+        if (colors == null)
+          {
+            colors = new Color32[vertices.Length];
+            for (int i = 0; i < colors.Length; i++)
+              {
+                byte grayScale = GrayScale(vertices[i].y);
+                Color32 color = new Color32();
+                color.a = 255;
+                color.r = grayScale;
+                color.g = grayScale;
+                color.b = grayScale;
+                colors[i] = color;
+              }
+          }
 
-      /*
-			Vector4[] tangents = new Vector4[slotList.Count*4];
-			Vector3 tangent = new Vector3(0, 0, 1);
-			for (int i = 0; i < slotList.Count*4; i++)
-				tangents[i] = tangent;
+        /*
+      Vector4[] tangents = new Vector4[slotList.Count*4];
+      Vector3 tangent = new Vector3(0, 0, 1);
+      for (int i = 0; i < slotList.Count*4; i++)
+        tangents[i] = tangent;
             */
 
-      mesh.vertices = vertices;
-      mesh.uv = uvs;
-      mesh.triangles = triangles;
-      //mesh.normals = normals;
-      //mesh.tangents = tangents;
-      mesh.colors32 = colors;
+        mesh.vertices = vertices;
+        mesh.uv = uvs;
+        mesh.triangles = triangles;
+        //mesh.normals = normals;
+        //mesh.tangents = tangents;
+        mesh.colors32 = colors;
 
-    }
+      }
 
     private byte GrayScale(float y)
-    {
-      float diff = y - yMax;
+      {
+        float diff = y - yMax;
 
-      if (diff > 0)
-        diff = 0;
-      else
-        diff = -diff;
+        if (diff > 0)
+          diff = 0;
+        else
+          diff = -diff;
 
-      if (diff > yMax)
-        diff = yMax;
+        if (diff > yMax)
+          diff = yMax;
 
-      float factor = 1 - diff / yMax;
+        float factor = 1 - diff / yMax;
 
-      if (factor > 0.1F)
-        return 255;
-      else 
-          return (byte)((factor/0.1) * 255);
-    }
+        if (factor > 0.2F)
+          return 255;
+        else 
+
+          return (byte)( (0.1+factor/0.2*0.1) * 255);
+
+      }
 
 
   }
