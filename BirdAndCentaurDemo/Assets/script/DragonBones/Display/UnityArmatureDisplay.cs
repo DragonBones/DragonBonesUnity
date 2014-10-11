@@ -58,6 +58,8 @@ namespace DragonBones.Display
 			for (int i = 0; i < slotList.Count; i++) {
 
 				Slot slot = slotList[i];
+				if(!slot._isDisplayOnStage)
+					continue;
 				float[] slotVertices = (slot.Display as UnityBoneDisplay).Vetices;
 				float[] slotUVs = (slot.Display as UnityBoneDisplay).UVs;
 
