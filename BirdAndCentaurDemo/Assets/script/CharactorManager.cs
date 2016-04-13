@@ -25,7 +25,7 @@ namespace LastCastle
 	{
 		void Awake ()
 		{
-			//Application.targetFrameRate = 30;
+			Application.targetFrameRate = 200;
 
 		}
 
@@ -52,8 +52,8 @@ namespace LastCastle
 
 			//add 20 centaur into scene at some random positions.
 			System.Random random = new System.Random();
-			for (int i=0; i<2; i++) {
-				for (int j=0; j<5; j++) {
+			for (int i=0; i<20; i++) {
+				for (int j=0; j<20; j++) {
 					Armature armature = factory.BuildArmature ("centaur/charactor", null, "charactor_all");
 					armature.AdvanceTime (0f);
 					float r0 = (float)random.NextDouble() + 0.5f;
@@ -66,8 +66,8 @@ namespace LastCastle
 			}
 
 			//add 20 bird into scene at some random positions.
-			for (int i=0; i<2; i++) {
-				for (int j=0; j<5; j++) {
+			for (int i=0; i<20; i++) {
+				for (int j=0; j<20; j++) {
 				Armature armature = factory.BuildArmature ("bird/charactor", null, "charactor_all");
 				armature.AdvanceTime (0f);
 				float r0 = (float)random.NextDouble() + 0.5f;

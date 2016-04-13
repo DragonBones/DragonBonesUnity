@@ -33,11 +33,11 @@ namespace DragonBones.Display
 		public UnityArmatureDisplay (TextureAtlas atlas)
 		{
 			_display = new GameObject ();
-			filter = _display.AddComponent("MeshFilter") as MeshFilter;
-			_display.AddComponent("MeshRenderer");
+			filter = _display.AddComponent<MeshFilter>() as MeshFilter;
+			_display.AddComponent<MeshRenderer>();
 			mesh = new Mesh();
 			filter.sharedMesh = mesh;
-			_display.renderer.sharedMaterial = atlas.Material;
+			_display.GetComponent<Renderer>().sharedMaterial = atlas.Material;
 
 		}
 
