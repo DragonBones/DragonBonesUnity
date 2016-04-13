@@ -10,10 +10,6 @@
 using System;
 using System.IO;
 using DragonBones;
-using DragonBones.Factorys;
-using DragonBones.Animation;
-using DragonBones.Objects;
-using DragonBones.Display;
 using DragonBones.Textures;
 using System.Collections.Generic;
 using Com.Viperstudio.Utils;
@@ -35,47 +31,49 @@ namespace LastCastle
 			TextAsset jsonReader = (TextAsset)Resources.Load("skeleton.json", typeof(TextAsset));
 			TextReader reader = new StringReader (jsonReader.text);
 			Dictionary<String, System.Object> skeletonRawData = Json.Deserialize (reader) as Dictionary<String, System.Object>;
-			SkeletonData skeletonData = ObjectDataParser.ParseSkeletonData (skeletonRawData);
+			DragonBonesData skeletonData = ObjectDataParser.ParseSkeletonData (skeletonRawData);
 
 			//read and parse texture atlas josn into TextureAtlas
 			Texture _textures = Resources.Load<Texture>("texture");
 			jsonReader = (TextAsset)Resources.Load("texture.json", typeof(TextAsset));
 			reader = new StringReader (jsonReader.text);
 			Dictionary<String, System.Object> atlasRawData = Json.Deserialize (reader) as Dictionary<String, System.Object>;
-			AtlasData atlasData = AtlasDataParser.ParseAtlasData (atlasRawData);
+			TextureAtlasData atlasData = AtlasDataParser.ParseAtlasData (atlasRawData);
 			TextureAtlas textureAtlas = new TextureAtlas (_textures, atlasData);
 
 			//use the above data to make factory
 			UnityFactory factory = new UnityFactory ();
-			factory.AddSkeletonData (skeletonData, skeletonData.Name);
-			factory.AddTextureAtlas (textureAtlas);
+			factory.addDragonBonesData (skeletonData, skeletonData.name);
+			factory.addTextureAtlas (textureAtlas, "");
 
 			//add 20 centaur into scene at some random positions.
+            
 			System.Random random = new System.Random();
+            
 			for (int i=0; i<20; i++) {
 				for (int j=0; j<20; j++) {
-					Armature armature = factory.BuildArmature ("centaur/charactor", null, "charactor_all");
-					armature.AdvanceTime (0f);
+					Armature armature = factory.buildArmature ("centaur/charactor", "charactor_all");
+					armature.advanceTime (0f);
 					float r0 = (float)random.NextDouble() + 0.5f;
 					float r1 = 0;//(float)random.NextDouble();
 					float r2 = (float)random.NextDouble();
-					((armature.Display as UnityArmatureDisplay).Display as GameObject).transform.position = new Vector3((float)j+r0*20f, 1, r2*15f);
-					WorldClock.Clock.Add (armature);
-					armature.Animation.GotoAndPlay ("run", -1, -1, 0);
+					((armature.getDisplay() as UnityArmatureDisplay).Display as GameObject).transform.position = new Vector3((float)j+r0 * 20f, 1,  r2 * 15f);
+					WorldClock.clock.add (armature);
+					armature.getAnimation().gotoAndPlay ("run", -1, -1, 0);
 				}
 			}
-
-			//add 20 bird into scene at some random positions.
-			for (int i=0; i<20; i++) {
+            
+            //add 20 bird into scene at some random positions.
+            for (int i=0; i<20; i++) {
 				for (int j=0; j<20; j++) {
-				Armature armature = factory.BuildArmature ("bird/charactor", null, "charactor_all");
-				armature.AdvanceTime (0f);
+				Armature armature = factory.buildArmature ("bird/charactor", "charactor_all");
+				armature.advanceTime (0f);
 				float r0 = (float)random.NextDouble() + 0.5f;
 				float r1 = (float)random.NextDouble() + 1;
 				float r2 = (float)random.NextDouble();
-				((armature.Display as UnityArmatureDisplay).Display as GameObject).transform.position = new Vector3((float)j+r0*20f, (float)i*3f+r1*5f, r2*15f);
-				WorldClock.Clock.Add (armature);
-				armature.Animation.GotoAndPlay ("fly", -1, -1, 0);
+				((armature.getDisplay() as UnityArmatureDisplay).Display as GameObject).transform.position = new Vector3((float)j+r0*20f, (float)i*3f+r1*5f, r2*15f);
+				WorldClock.clock.add (armature);
+				armature._animation.gotoAndPlay ("fly", -1, -1, 0);
 				}
 			}
          }
@@ -83,7 +81,7 @@ namespace LastCastle
 		// Update is called once per frame
 		void Update ()
 		{
-			WorldClock.Clock.AdvanceTime (Time.deltaTime);
+			WorldClock.clock.advanceTime (Time.deltaTime);
 		}
 
 	}

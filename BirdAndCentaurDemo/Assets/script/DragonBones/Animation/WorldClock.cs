@@ -9,147 +9,160 @@
 // ------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using Com.Viperstudio.Utils;
-
-namespace DragonBones.Animation
+namespace DragonBones
 {
-	public class WorldClock : IAnimatable
+	public class WorldClock: IAnimatable
 	{
-		public static WorldClock Clock = new WorldClock();
+
+	
+		public	static WorldClock clock = new WorldClock(-1, 1);
 		
-		private List<IAnimatable> _animatableList;		
+	
+		private 	bool _dirty;
+		private bool _isPlaying;
 		private float _time;
+		private float _timeScale;
 		
-		/**
-		 * @private
-		 */
-		public float Time
-		{
-			get { return _time; }
-		}
 		
-		private float _timeScale = 1f;
-		/**
-		 * The time scale to apply to the number of second passed to the advanceTime() method.
-		 * @param A Number to use as a time scale (NaN or < 0 to disable).
-		 */
-		/**
-		 * @private
-		 */
-		public float timeScale
+		
+		private  List<IAnimatable> _animatableList = new List<IAnimatable>();
+
+		public WorldClock (float time, float timeScale)
 		{
-			get { return _timeScale;}
-			set {
-					if (value < 0 || float.IsNaN(value))
-					{
-						value = 0;
-					}
-					_timeScale = value;   
-				}
+			_dirty = false;
+		    _isPlaying = true;
+			_time = 0;
+			setTimeScale(timeScale);
 		}
 
 	
-		/**
-		 * Creates a new WorldClock instance. (use the static var WorldClock.clock instead).
-		 */
-		public WorldClock()
+		public	static WorldClock getInstance()
 		{
-			_time = (float)DateTime.Now.Millisecond * 0.001f;
-			_animatableList = new List<IAnimatable>();
-
+			return clock;
 		}
 		
-		/** 
-		 * Returns true if the IAnimatable instance is contained by WorldClock instance.
-		 * @param	An IAnimatable instance (Armature or custom)
-		 * @return true if the IAnimatable instance is contained by WorldClock instance.
-		 */
-		public bool Contains(IAnimatable animatable)
+		public float getTime() 
 		{
-			return _animatableList.IndexOf(animatable) >= 0;
+			return _time;
 		}
-		/**
-		 * Add a IAnimatable instance (Armature or custom) to this WorldClock instance.
-		 * @param	An IAnimatable instance (Armature, WorldClock or custom)
-		 */
-		public void Add(IAnimatable animatable)
+		
+		public float getTimeScale() 
 		{
-			if (animatable!=null && _animatableList.IndexOf(animatable) == -1)
+			return _timeScale;
+		}
+
+		public void setTimeScale(float timeScale)
+		{
+			if (timeScale < 0 || timeScale != timeScale)
+			{
+				timeScale = 1.0f;
+			}
+			
+			_timeScale = timeScale;
+		}
+
+
+		public bool contains(IAnimatable animatable) 
+		{
+			return _animatableList.IndexOf(animatable) >=0;
+		}
+		
+		public void add(IAnimatable animatable)
+		{
+			if (animatable!=null && !contains(animatable))
 			{
 				_animatableList.Add(animatable);
 			}
 		}
-		/**
-		 * Remove a IAnimatable instance (Armature or custom) from this WorldClock instance.
-		 * @param	An IAnimatable instance (Armature or custom)
-		 */
-		public void Remove(IAnimatable animatable)
+		
+		public void remove(IAnimatable animatable)
 		{
-			int index = _animatableList.IndexOf(animatable);
-			if (index >= 0)
+			if (animatable==null) { return; }
+			
+
+			if (_animatableList.IndexOf(animatable) >=0)
 			{
-				_animatableList.RemoveAt(index);
+				_animatableList.Remove(animatable);
+				//_dirty = true;
 			}
 		}
-		/**
-		 * Remove all IAnimatable instance (Armature or custom) from this WorldClock instance.
-		 *
-		 */
-		public void Clear()
+		
+		public void removeAll()
 		{
 			_animatableList.Clear();
 		}
-		/**
-		 * Update all registered IAnimatable instance animations using this method typically in an ENTERFRAME Event or with a Timer.
-		 * @param	The amount of second to move the playhead ahead.
-		 */
-		public void AdvanceTime(float passedTime)
+		
+		public void play()
 		{
-			
-			if(passedTime < 0)
-			{
-				float currentTime = (float)DateTime.Now.Millisecond * 0.001f;
-				passedTime = currentTime;// - _time;
-				_time = currentTime;
-
-			}
-			
-			passedTime *= _timeScale;
-			
-			int length = _animatableList.Count;
-			if(length == 0)
+			_isPlaying = true;
+		}
+		
+		public void stop()
+		{
+			_isPlaying = false;
+		}
+		
+		public void advanceTime(float passedTime)
+		{
+			if (!_isPlaying)
 			{
 				return;
 			}
-			int currentIndex = 0;
-			int i = 0;
-			for(i = 0;i < length;i ++)
+			
+			if (passedTime < 0 || passedTime != passedTime)
 			{
-				IAnimatable animatable = _animatableList[i];
-				if(animatable!=null)
+				/*
+        passedTime = getTimer() * 0.001f - _time;
+        if (passedTime < 0)
+        {
+            passedTime = 0.f;
+        }
+        */
+				passedTime = 0.0f;
+			}
+			
+			passedTime *= _timeScale;
+			_time += passedTime;
+
+			if (_animatableList.Count<=0)
+			{
+				return;
+			}
+			
+			for (int i = 0; i < _animatableList.Count; ++i)
+			{
+				if (_animatableList[i]!=null)
 				{
-					if(currentIndex != i)
+					_animatableList[i].advanceTime(passedTime);
+				}
+			}
+
+			/*
+			if (_dirty)
+			{
+				int curIdx = 0;
+				
+				for (int i = 0; i < _animatableList.Count; ++i)
+				{
+					if (_animatableList[i])
 					{
-						_animatableList[currentIndex] = animatable;
-						_animatableList[i] = null;
+						if (curIdx != i)
+						{
+							_animatableList[curIdx] = _animatableList[i];
+							_animatableList[i] = null;
+						}
+						
+						curIdx++;
 					}
-					animatable.AdvanceTime(passedTime);
-					currentIndex ++;
 				}
+				
+				_animatableList.(curIdx);
+				_dirty = false;
 			}
+			*/
 
-			if (currentIndex != i)
-			{
-				length = _animatableList.Count;
-				while(i < length)
-				{
-					_animatableList[currentIndex ++] = _animatableList[i ++];
-				}
-				_animatableList.RemoveRange(currentIndex, length - currentIndex);
-			}
 
-		}
-		
-	}
+   }
 }
 
+}

@@ -29,10 +29,14 @@ public class FPS : MonoBehaviour
 	private float accum   = 0; // FPS accumulated over the interval
 	private int   frames  = 0; // Frames drawn over the interval
 	private float timeleft; // Left time for current interval
-	
-	void Start()
+    private GUIText guiText;
+
+
+    void Start()
 	{
-		if( !GetComponent<GUIText>() )
+        guiText = GetComponent<GUIText>();
+
+        if ( !guiText )
 		{
 			Debug.Log("UtilityFramesPerSecond needs a GUIText component!");
 			enabled = false;
@@ -53,15 +57,15 @@ public class FPS : MonoBehaviour
 			// display two fractional digits (f2 format)
 			float fps = accum/frames;
 			string format = System.String.Format("{0:F2} FPS",fps);
-			GetComponent<GUIText>().text = format;
+			guiText.text = format;
 			
 			if(fps < 30)
-				GetComponent<GUIText>().material.color = Color.yellow;
+				guiText.material.color = Color.yellow;
 			else 
 				if(fps < 10)
-					GetComponent<GUIText>().material.color = Color.red;
+					guiText.material.color = Color.red;
 			else
-				GetComponent<GUIText>().material.color = Color.green;
+				guiText.material.color = Color.green;
 			//	DebugConsole.Log(format,level);
 			timeleft = updateInterval;
 			accum = 0.0F;

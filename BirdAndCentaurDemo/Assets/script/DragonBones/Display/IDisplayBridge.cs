@@ -9,9 +9,9 @@
 // ------------------------------------------------------------------------------
 using System;
 using Com.Viperstudio.Geom;
-using DragonBones.Objects;
+using DragonBones;
 
-namespace DragonBones.Display
+namespace DragonBones
 {
 		public interface IDisplayBridge
 		{

@@ -9,22 +9,21 @@
 // ------------------------------------------------------------------------------
 using System;
 using UnityEngine;
-using DragonBones.Objects;
+using DragonBones;
 
 namespace DragonBones.Textures
 {
-    public class TextureAtlas
+    public class TextureAtlas:ITextureAtlas
     {
         public string Name;
         public Texture Texture;
-        public AtlasData AtlasData;
         public Material Material;
 
-        public TextureAtlas(Texture texture, AtlasData atlasData)
+        public TextureAtlas(Texture texture, TextureAtlasData atlasData)
         {
-            Name = atlasData.Name;
+            Name = atlasData.name;
             Texture = texture;
-            AtlasData = atlasData;
+            textureAtlasData = atlasData;
 
             Shader shader = Shader.Find("Transparent/Depth Ordered Unlit");
             Material = new Material(shader);

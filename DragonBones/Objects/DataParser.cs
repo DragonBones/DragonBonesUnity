@@ -11,14 +11,14 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace DragonBones.Objects
+namespace DragonBones
 {
 	public class DataParser
 	{
 
 
-		
-		public static SkeletonData parseData(Object rawData)
+		/*
+		public static DragonBonesData parseData(Object rawData)
 		{
 			if(rawData is XmlNode)
 			{
@@ -30,6 +30,7 @@ namespace DragonBones.Objects
 			}
 			return null;
 		}
+        */
 	}
 }
 

@@ -11,17 +11,17 @@ using System;
 using System.Collections.Generic;
 using Com.Viperstudio.Utils;
 using DragonBones.Utils;
-using DragonBones.Core;
+using DragonBones;
 using Com.Viperstudio.Geom;
 
-namespace DragonBones.Objects
+namespace DragonBones
 {
 	public class ObjectDataParser
 	{
 
 		private delegate Object Function(Dictionary<string, Object> frameObject, uint frameRate);
 		
-		public static SkeletonData ParseSkeletonData(Dictionary<string, Object> rawData)
+		public static DragonBonesData ParseSkeletonData(Dictionary<string, Object> rawData)
 		{
 			if(rawData == null)
 			{
@@ -30,6 +30,7 @@ namespace DragonBones.Objects
 			
 			string version = rawData[ConstValues.A_VERSION].ToString();
 
+            /*
 			switch (version)
 			{
 			case DragonBones.Core.DragonBones.DATA_VERSION:
@@ -37,44 +38,45 @@ namespace DragonBones.Objects
 			default:
 				throw new Exception("Nonsupport version!");
 			}
+            */
 			
 			uint frameRate =  uint.Parse(rawData[ConstValues.A_FRAME_RATE].ToString());
-
-			SkeletonData data = new SkeletonData();
-			data.Name = rawData[ConstValues.A_NAME] as String;
+            //frameRate = 60;
+            DragonBonesData data = new DragonBonesData();
+			data.name = rawData[ConstValues.A_NAME] as String;
 
 			foreach(Dictionary<String, Object> armatureObject in rawData[ConstValues.ARMATURE] as List<Object>)
 			{
 
-				data.AddArmatureData(parseArmatureData(armatureObject as Dictionary<string, object>, data, frameRate));
+				data.armatureDataList.Add(parseArmatureData(armatureObject as Dictionary<string, object>, data, frameRate));
 			}
 
 			return data;
 		}
 		
-		private static ArmatureData parseArmatureData(Dictionary<String, Object> armatureObject, SkeletonData data, uint frameRate)
+		private static ArmatureData parseArmatureData(Dictionary<String, Object> armatureObject, DragonBonesData data, uint frameRate)
 		{
 			ArmatureData armatureData = new ArmatureData();
-			armatureData.Name = armatureObject[ConstValues.A_NAME] as String;
+			armatureData.name = armatureObject[ConstValues.A_NAME] as String;
 
 			//Logger.Log("ObjectDataParser::: " + armatureObject[ConstValues.BONE].ToString());
 			foreach(Dictionary<String, Object> boneObject in armatureObject[ConstValues.BONE] as List<object>)
 			{
 
-				armatureData.AddBoneData(parseBoneData(boneObject as Dictionary<string, object>));
+				armatureData.boneDataList.Add(parseBoneData(boneObject as Dictionary<string, object>));
 			}
 			
 			foreach(Dictionary<String, Object> skinObject in armatureObject[ConstValues.SKIN] as List<object>)
 			{
-				armatureData.AddSkinData(parseSkinData(skinObject as Dictionary<string, object>, data));
+				armatureData.skinDataList.Add(parseSkinData(skinObject as Dictionary<string, object>, data));
 			}
 			
 			DBDataUtil.TransformArmatureData(armatureData);
-			armatureData.SortBoneDataList();
+			armatureData.sortBoneDataList();
 			
 			foreach(Dictionary<String, Object> animationObject in armatureObject[ConstValues.ANIMATION] as List<object>)
 			{
-				armatureData.AddAnimationData(parseAnimationData(animationObject as Dictionary<string, object>, armatureData, frameRate));
+				armatureData.animationDataList.Add(parseAnimationData(animationObject as Dictionary<string, object>, armatureData, frameRate));
 			}
 			
 			return armatureData;
@@ -83,21 +85,21 @@ namespace DragonBones.Objects
 		private static BoneData parseBoneData(Dictionary<String, Object> boneObject)
 		{
 			BoneData boneData = new BoneData();
-			boneData.Name = boneObject[ConstValues.A_NAME] as String;
+			boneData.name = boneObject[ConstValues.A_NAME] as String;
 			if (boneObject.ContainsKey (ConstValues.A_PARENT)) {
-				boneData.Parent = boneObject [ConstValues.A_PARENT] as string;
+				boneData.parent = boneObject [ConstValues.A_PARENT] as string;
 			}
 			if (boneObject.ContainsKey (ConstValues.A_LENGTH)) {
-				boneData.Length = boneObject [ConstValues.A_LENGTH] == null ? 0 : (int)boneObject [ConstValues.A_LENGTH];
+				boneData.length = boneObject [ConstValues.A_LENGTH] == null ? 0 : (int)boneObject [ConstValues.A_LENGTH];
 			}
 
-
-			if (boneObject.ContainsKey (ConstValues.A_SCALE_MODE)) {
-				Object scaleModeObj = boneObject[ConstValues.A_SCALE_MODE];
+            
+			if (boneObject.ContainsKey (ConstValues.A_INHERIT_SCALE)) {
+				Object scaleModeObj = boneObject[ConstValues.A_INHERIT_SCALE];
 			   if (scaleModeObj != null) 
 				{
-					int scaleMode = int.Parse(scaleModeObj.ToString());
-					boneData.ScaleMode = scaleMode;
+					bool scaleMode = bool.Parse(scaleModeObj.ToString());
+					boneData.inheritScale = scaleMode;
 				}
 			}
 			if(boneObject.ContainsKey (ConstValues.A_FIXED_ROTATION))
@@ -105,110 +107,125 @@ namespace DragonBones.Objects
 		     	bool inheritRotation = bool.Parse(boneObject[ConstValues.A_FIXED_ROTATION].ToString ());
 			    if (inheritRotation)
 			     {
-				   boneData.FixedRotation = inheritRotation;
+				   boneData.inheritRotation = inheritRotation;
 			     }
 			}
-			parseTransform(boneObject[ConstValues.TRANSFORM] as Dictionary<string, object>, boneData.Global);
-			boneData.Transform.Copy(boneData.Global);
+           
+            parseTransform(boneObject[ConstValues.TRANSFORM] as Dictionary<string, object>, boneData.global);
+			boneData.transform.Copy(boneData.global);
 
-			//Logger.Log (boneData.Name + " " +  boneData.Transform.X + " " + boneData.Transform.Y);
+			//Logger.Log (boneData.name + " " +  boneData.transform.X + " " + boneData.transform.Y);
 			
 			return boneData;
 		}
 		
-		private static SkinData parseSkinData(Dictionary<String, Object> skinObject, SkeletonData data)
+		private static SkinData parseSkinData(Dictionary<String, Object> skinObject, DragonBonesData data)
 		{
 			SkinData skinData = new SkinData();
-			skinData.Name = skinObject[ConstValues.A_NAME] as String;
+			skinData.name = skinObject[ConstValues.A_NAME] as String;
 			
 			foreach(Dictionary<String, Object> slotObject in skinObject[ConstValues.SLOT] as List<object>)
 			{
-				skinData.AddSlotData(parseSlotData(slotObject as Dictionary<string, object>, data));
+				skinData.slotDataList.Add(parseSlotData(slotObject as Dictionary<string, object>, data));
 			}
 			
 			return skinData;
 		}
 		
-		private static SlotData parseSlotData(Dictionary<String, Object> slotObject, SkeletonData data)
+		private static SlotData parseSlotData(Dictionary<String, Object> slotObject, DragonBonesData data)
 		{
 			SlotData slotData = new SlotData();
-			slotData.Name = slotObject[ConstValues.A_NAME] as String;
-			slotData.Parent = slotObject[ConstValues.A_PARENT] as String;
-			slotData.ZOrder = (float)slotObject[ConstValues.A_Z_ORDER];
+			slotData.name = slotObject[ConstValues.A_NAME] as String;
+			slotData.parent = slotObject[ConstValues.A_PARENT] as String;
+			slotData.zOrder = (float)slotObject[ConstValues.A_Z_ORDER];
 
 			if (slotObject.ContainsKey (ConstValues.A_BLENDMODE)) {
 			  
 			  if (slotObject [ConstValues.A_BLENDMODE] == null) 
 			  {
-				slotData.BlendMode = "normal";
+				slotData.blendMode = DragonBones.getBlendModeByString("normal");
 			  }
 			  else
 			  {
-				slotData.BlendMode = slotObject [ConstValues.A_BLENDMODE].ToString();
+				slotData.blendMode = DragonBones.getBlendModeByString(slotObject [ConstValues.A_BLENDMODE].ToString());
 			  }
 			}
 			foreach(Dictionary<String, Object> displayObject in slotObject[ConstValues.DISPLAY] as List<object>)
 			{
-				slotData.AddDisplayData(parseDisplayData(displayObject as Dictionary<string, object>, data));
+				slotData.displayDataList.Add(parseDisplayData(displayObject as Dictionary<string, object>, data));
 			}
 			
 			return slotData;
 		}
 		
-		private static DisplayData parseDisplayData(Dictionary<String, Object> displayObject, SkeletonData data)
+		private static DisplayData parseDisplayData(Dictionary<String, Object> displayObject, DragonBonesData data)
 		{
 			DisplayData displayData = new DisplayData();
-			displayData.Name = displayObject[ConstValues.A_NAME] as String;
-			displayData.Type = displayObject[ConstValues.A_TYPE] as String;
-			
-			displayData.Pivot = data.AddSubTexturePivot(
+			displayData.name = displayObject[ConstValues.A_NAME] as String;
+			displayData.type = DragonBones.getDisplayTypeByString( displayObject[ConstValues.A_TYPE] as String);
+
+            displayData.pivot = new Point();
+                /*
+                data.addSubTexturePivot(
 				0, 
 				0, 
-				displayData.Name
+				displayData.name
 				);
-			
-			parseTransform(displayObject[ConstValues.TRANSFORM] as Dictionary<String, object>, displayData.Transform, displayData.Pivot);
+			    */
+			parseTransform(displayObject[ConstValues.TRANSFORM] as Dictionary<String, object>, displayData.transform, displayData.pivot);
 			
 			return displayData;
 		}
 		
 		private static AnimationData parseAnimationData(Dictionary<String, Object> animationObject, ArmatureData armatureData, uint frameRate)
 		{
+            
 			AnimationData animationData = new AnimationData();
-			animationData.Name = animationObject[ConstValues.A_NAME] as String;
-			animationData.FrameRate = (uint)frameRate;
+			animationData.name = animationObject[ConstValues.A_NAME] as String;
+            animationData.frameRate = (int)frameRate;
 
-			animationData.Loop = int.Parse(animationObject[ConstValues.A_LOOP].ToString());
-			animationData.FadeInTime = (float)animationObject[ConstValues.A_FADE_IN_TIME];
-			animationData.Duration = (float)animationObject [ConstValues.A_DURATION] /frameRate;
-			animationData.Scale = (float)animationObject[ConstValues.A_SCALE];
-			
-			if(animationObject.ContainsKey(ConstValues.A_TWEEN_EASING))
+            animationData.playTimes = int.Parse(animationObject[ConstValues.A_LOOP].ToString());
+			animationData.fadeTime = (float)animationObject[ConstValues.A_FADE_IN_TIME];
+			animationData.duration = (int)((float)animationObject [ConstValues.A_DURATION] * 1000.0f /frameRate);
+			animationData.scale = (float)animationObject[ConstValues.A_SCALE];
+
+            if (animationObject.ContainsKey(ConstValues.A_TWEEN_EASING))
 			{
 				Object tweenEase = animationObject[ConstValues.A_TWEEN_EASING];
 				if(
 					tweenEase == null
 					)
 				{
-					animationData.TweenEasing = float.NaN;
+					animationData.tweenEasing = float.NaN;
 				}
 				else
 				{
-					animationData.TweenEasing = (float)tweenEase;
+					animationData.tweenEasing = (float)tweenEase;
 				}
 			}
 			else
 			{
-				animationData.TweenEasing = float.NaN;
+				animationData.tweenEasing = DragonBones.USE_FRAME_TWEEN_EASING;
 			}
-			
-			parseTimeline(animationObject as Dictionary<string, object>, animationData, parseMainFrame, frameRate);
+
+
+            if (animationObject.ContainsKey(ConstValues.A_AUTO_TWEEN))
+            {
+                bool autoTween = bool.Parse(animationObject[ConstValues.A_TWEEN_EASING].ToString());
+                animationData.autoTween = autoTween;
+            }
+            else
+            {
+                animationData.autoTween = true;
+            }
+
+            parseTimeline(animationObject as Dictionary<string, object>, animationData, parseMainFrame, frameRate);
 			
 			TransformTimeline timeline;
 			string timelineName;
 			foreach(Dictionary<String, Object> timelineObject in animationObject[ConstValues.TIMELINE] as List<object>)
 			{
-				timeline = parseTransformTimeline(timelineObject as Dictionary<string, object>, animationData.Duration, frameRate);
+				timeline = parseTransformTimeline(timelineObject as Dictionary<string, object>, animationData.duration, frameRate);
 				timelineName = (timelineObject as Dictionary<string, object>)[ConstValues.A_NAME] as String;
 				animationData.AddTimeline(timeline, timelineName);
 			}
@@ -224,19 +241,19 @@ namespace DragonBones.Objects
 
 			if(timelineObject.ContainsKey(ConstValues.FRAME))
 			{
-				float position = 0f;
+				int position = 0;
 				Frame frame = null;
 
 				foreach(Dictionary<String, Object> frameObject in timelineObject[ConstValues.FRAME] as List<object>)
 				{
 					frame = frameParser(frameObject as Dictionary<string, object>, frameRate) as Frame;
-					frame.Position = position;
-					timeline.AddFrame(frame);
-					position += frame.Duration;
+					frame.position = position;
+					timeline.frameList.Add(frame);
+					position += frame.duration;
 				}
 				if(frame!=null)
 				{
-					frame.Duration = timeline.Duration - frame.Position;
+					frame.duration = timeline.duration - frame.position;
 				}
 
 			}
@@ -244,28 +261,28 @@ namespace DragonBones.Objects
 		
 		}
 		
-		private static TransformTimeline parseTransformTimeline(Dictionary<String, Object> timelineObject, float duration, uint frameRate)
+		private static TransformTimeline parseTransformTimeline(Dictionary<String, Object> timelineObject, int duration, uint frameRate)
 		{
 			TransformTimeline timeline = new TransformTimeline();
-			timeline.Duration = duration;
+			timeline.duration = duration;
 			
 			parseTimeline(timelineObject, timeline, parseTransformFrame, frameRate);
 			
-			timeline.Scale = (float)timelineObject[ConstValues.A_SCALE];
-			timeline.Offset = (float)timelineObject[ConstValues.A_OFFSET];
+			timeline.scale = (float)timelineObject[ConstValues.A_SCALE];
+            timeline.offset = (float)timelineObject[ConstValues.A_OFFSET];
 			
 			return timeline;
 		}
 		
 		private static void parseFrame(Dictionary<String, Object> frameObject, Frame frame, uint frameRate)
 		{
-			frame.Duration = (float)frameObject[ConstValues.A_DURATION] / frameRate;
+			frame.duration = (int)((float)frameObject[ConstValues.A_DURATION] * 1000.0f / frameRate);
 			if(frameObject.ContainsKey(ConstValues.A_ACTION))
-			    frame.Action = frameObject[ConstValues.A_ACTION] as String;
+			    frame.action = frameObject[ConstValues.A_ACTION] as String;
 			if(frameObject.ContainsKey(ConstValues.A_EVENT))
-			    frame.Evt = frameObject[ConstValues.A_EVENT] as String;
+			    frame.evt = frameObject[ConstValues.A_EVENT] as String;
 			if(frameObject.ContainsKey(ConstValues.A_SOUND))
-			    frame.Sound = frameObject[ConstValues.A_SOUND] as String;
+			    frame.sound = frameObject[ConstValues.A_SOUND] as String;
 		}
 		
 		private static Frame parseMainFrame(Dictionary<String, Object> frameObject, uint frameRate)
@@ -282,11 +299,11 @@ namespace DragonBones.Objects
 
 			if(frameObject.ContainsKey(ConstValues.A_HIDE))
 			{
-				frame.Visible = (uint)frameObject[ConstValues.A_HIDE] != 1;
+				frame.visible = (uint)frameObject[ConstValues.A_HIDE] != 1;
 			}
 			else
 			{
-				frame.Visible = true;
+				frame.visible = true;
 			}
 
 			
@@ -297,54 +314,54 @@ namespace DragonBones.Objects
 					tweenEase == null
 					)
 				{
-					frame.TweenEasing = float.NaN;
+					frame.tweenEasing = float.NaN;
 				}
 				else
 				{
-					frame.TweenEasing = (float)tweenEase;
+					frame.tweenEasing = (float)tweenEase;
 				}
 			}
 			else
 			{
-				frame.TweenEasing = 0f;
+				frame.tweenEasing = 0f;
 			}
 
 			if(frameObject.ContainsKey(ConstValues.A_TWEEN_ROTATE))
 			{
-				frame.TweenRotate = (int)frameObject[ConstValues.A_TWEEN_ROTATE];
+				frame.tweenRotate = (int)frameObject[ConstValues.A_TWEEN_ROTATE];
 			}
 			   
 			if(frameObject.ContainsKey(ConstValues.A_DISPLAY_INDEX))
 			{
 
-				frame.DisplayIndex = int.Parse(frameObject[ConstValues.A_DISPLAY_INDEX].ToString());
+				frame.displayIndex = int.Parse(frameObject[ConstValues.A_DISPLAY_INDEX].ToString());
 
 			}
 			     
 
 
 			if(frameObject.ContainsKey(ConstValues.A_Z_ORDER))
-			     frame.ZOrder = (float)frameObject[ConstValues.A_Z_ORDER];
+			     frame.zOrder = (float)frameObject[ConstValues.A_Z_ORDER];
 			if(frameObject.ContainsKey(ConstValues.TRANSFORM))
-				 parseTransform(frameObject[ConstValues.TRANSFORM] as Dictionary<string, object>, frame.Global, frame.Pivot);
+				 parseTransform(frameObject[ConstValues.TRANSFORM] as Dictionary<string, object>, frame.global, frame.pivot);
 
-			frame.Transform.Copy(frame.Global);
+			frame.transform.Copy(frame.global);
 			Dictionary<String, Object> colorTransformObject = null;
 			if(frameObject.ContainsKey(ConstValues.COLOR_TRANSFORM))
 			   colorTransformObject = frameObject[ConstValues.COLOR_TRANSFORM] as Dictionary<string, object>;
 
 			if(colorTransformObject!=null)
 			{
-				frame.Color = new ColorTransform();
-				frame.Color.AlphaOffset = (float)colorTransformObject[ConstValues.A_ALPHA_OFFSET];
-				frame.Color.RedOffset = (float)colorTransformObject[ConstValues.A_RED_OFFSET];
-				frame.Color.GreenOffset = (float)colorTransformObject[ConstValues.A_GREEN_OFFSET];
-				frame.Color.BlueOffset = (float)colorTransformObject[ConstValues.A_BLUE_OFFSET];
+				frame.color = new ColorTransform();
+				frame.color.AlphaOffset = (float)colorTransformObject[ConstValues.A_ALPHA_OFFSET];
+				frame.color.RedOffset = (float)colorTransformObject[ConstValues.A_RED_OFFSET];
+				frame.color.GreenOffset = (float)colorTransformObject[ConstValues.A_GREEN_OFFSET];
+				frame.color.BlueOffset = (float)colorTransformObject[ConstValues.A_BLUE_OFFSET];
 
-				frame.Color.AlphaMultiplier = (float)colorTransformObject[ConstValues.A_ALPHA_MULTIPLIER] * 0.01f;
-				frame.Color.RedMultiplier = (float)colorTransformObject[ConstValues.A_RED_MULTIPLIER] * 0.01f;
-				frame.Color.GreenMultiplier = (float)colorTransformObject[ConstValues.A_GREEN_MULTIPLIER] * 0.01f;
-				frame.Color.BlueMultiplier = (float)colorTransformObject[ConstValues.A_BLUE_MULTIPLIER] * 0.01f;
+				frame.color.AlphaMultiplier = (float)colorTransformObject[ConstValues.A_ALPHA_MULTIPLIER] * 0.01f;
+				frame.color.RedMultiplier = (float)colorTransformObject[ConstValues.A_RED_MULTIPLIER] * 0.01f;
+				frame.color.GreenMultiplier = (float)colorTransformObject[ConstValues.A_GREEN_MULTIPLIER] * 0.01f;
+				frame.color.BlueMultiplier = (float)colorTransformObject[ConstValues.A_BLUE_MULTIPLIER] * 0.01f;
 			}
 			
 			return frame;

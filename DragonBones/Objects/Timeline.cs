@@ -9,67 +9,33 @@
 // ------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-namespace DragonBones.Objects
+namespace DragonBones
 {
-	public class Timeline
-	{
-		private List<Frame> _frameList;
-		public List<Frame> FrameList
+		public class Timeline
 		{
-			get { return _frameList; }
-		}
-		
-		private float _duration;
-		public float Duration
-		{
-			get { return _duration; }
-			set { _duration = value >= 0 ? value : 0; } 
-		}
+
 	
-		private float _scale;
-		public float Scale
+		public int duration;
+		public float scale;
+		public List<Frame> frameList = new List<Frame>();
+	    public Timeline ()
 		{
-			get { return _scale; }
-			set { _scale = value >= 0 ? value : 1;}
+			duration = 0;
+			scale = 1.0f;
 		}
 
-		public Timeline()
+		public virtual void dispose()
 		{
-			_frameList = new List<Frame>();
-			_duration = 0;
-			_scale = 1;
-		}
-		
-		public virtual void Dispose()
-		{
-			int i = _frameList.Count;
-			while(i -- > 0)
+			for (int i = 0; i < frameList.Count;  ++i)
 			{
-				_frameList[i].Dispose();
-			}
-
-		    _frameList.Clear();
-			_frameList = null;
-		}
-		
-		public void AddFrame(Frame frame)
-		{
-			if(frame == null)
-			{
-				throw new ArgumentException();
+				frameList[i].dispose();
+				//delete frameList[i];
 			}
 			
-			if(_frameList.IndexOf(frame) < 0)
-			{
-
-				_frameList.Add(frame);
-			
-			}
-			else
-			{
-				throw new ArgumentException();
-			}
+			frameList.Clear();
 		}
-	}
+
+
+		}
 }
 

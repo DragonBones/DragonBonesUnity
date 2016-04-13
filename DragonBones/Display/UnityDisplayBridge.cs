@@ -9,11 +9,11 @@
 // ------------------------------------------------------------------------------
 using System;
 using Com.Viperstudio.Geom;
-using DragonBones.Objects;
+using DragonBones;
 using UnityEngine;
 using Com.Viperstudio.Utils;
 
-namespace DragonBones.Display
+namespace DragonBones
 {
 	public class UnityDisplayBridge :IDisplayBridge
 		{

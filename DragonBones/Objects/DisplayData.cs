@@ -9,27 +9,20 @@
 // ------------------------------------------------------------------------------
 using System;
 using Com.Viperstudio.Geom;
-namespace DragonBones.Objects
+
+namespace DragonBones
 {
 	public class DisplayData
 	{
-		public const string ARMATURE = "armature";
-		public const string IMAGE = "image";
-		
-		public string Name;
-		public string Type;
-		public DBTransform Transform;
-		public Point Pivot;
-		
-		public DisplayData()
+
+		public string name;
+		public DragonBones.DisplayType type;
+		public DBTransform transform = new DBTransform();
+		public Point pivot = new Point();
+
+		public DisplayData ()
 		{
-			Transform = new DBTransform();
-		}
-		
-		public void Dispose()
-		{
-			Transform = null;
-			Pivot = null;
+			type = DragonBones.DisplayType.DT_IMAGE;
 		}
 	}
 }

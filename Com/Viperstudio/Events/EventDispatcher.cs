@@ -118,5 +118,20 @@ namespace Com.Viperstudio.Events
 						else
 								return false;
 		}
+		//TODO:check
+		public bool HasEvent(string eventType)
+		{
+			if (this.events == null) {
+				return false;
+			}
+		
+		    else if (this.events.ContainsKey (eventType))
+			    return true;
+		    else
+			    return false;
+		}
+
+
+
 	}
 }

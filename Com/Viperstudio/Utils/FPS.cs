@@ -29,10 +29,14 @@ public class FPS : MonoBehaviour
 	private float accum   = 0; // FPS accumulated over the interval
 	private int   frames  = 0; // Frames drawn over the interval
 	private float timeleft; // Left time for current interval
-	
-	void Start()
+    private GUIText guiText;
+
+
+    void Start()
 	{
-		if( !guiText )
+        guiText = GetComponent<GUIText>();
+
+        if ( !guiText )
 		{
 			Debug.Log("UtilityFramesPerSecond needs a GUIText component!");
 			enabled = false;

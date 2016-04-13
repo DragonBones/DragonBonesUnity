@@ -23,6 +23,13 @@ namespace Com.Viperstudio.Geom
 			Y = y;
 		  }
 
-		}
+        public void Copy(Point transform)
+        {
+            X = transform.X;
+            Y = transform.Y;
+           
+        }
+
+    }
 }
 

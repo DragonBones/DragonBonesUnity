@@ -10,9 +10,9 @@
 using System;
 using Com.Viperstudio.Geom;
 using Com.Viperstudio.Utils;
-using DragonBones.Objects;
+using DragonBones;
 
-namespace DragonBones.Utils
+namespace DragonBones
 {
 	public class TransformUtil
 	{
@@ -33,6 +33,7 @@ namespace DragonBones.Utils
 			transform.X = _helpMatrix.A * x + _helpMatrix.C * y + _helpMatrix.Tx;
 			transform.Y = _helpMatrix.D * y + _helpMatrix.B * x + _helpMatrix.Ty;
 			
+
 			transform.SkewX = FormatRadian(transform.SkewX - parent.SkewX);
 			transform.SkewY = FormatRadian(transform.SkewY - parent.SkewY);
 		}

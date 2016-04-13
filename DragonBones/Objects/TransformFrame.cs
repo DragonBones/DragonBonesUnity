@@ -9,47 +9,38 @@
 // ------------------------------------------------------------------------------
 using System;
 using Com.Viperstudio.Geom;
-using System.Collections.Generic;
-
-namespace DragonBones.Objects
+namespace DragonBones
 {
-	public class TransformFrame : Frame
-	{
-		public float TweenEasing;
-		public int TweenRotate;
-		public int DisplayIndex;
-		public bool Visible;
-		public float ZOrder;
-		
-		public DBTransform Global;
-		public DBTransform Transform;
-		public Point Pivot;
-		public ColorTransform Color;
-		
-		
-		public TransformFrame()
+		public class TransformFrame: Frame
 		{
-			
-			TweenEasing = 0;
-			TweenRotate = 0;
-			DisplayIndex = 0;
-			Visible = true;
-			ZOrder = float.NaN;
-			
-			Global = new DBTransform();
-			Transform = new DBTransform();
-			Pivot = new Point();
-		}
-		
-		override public void Dispose()
+	
+		public bool visible;
+		public bool tweenScale;
+		public int tweenRotate;
+		public int displayIndex;
+		public float zOrder;
+		// NaN:no tween, 10:auto tween, [-1, 0):ease in, 0:line easing, (0, 1]:ease out, (1, 2]:ease in out
+		public float tweenEasing;
+
+		public DBTransform global = new DBTransform();
+		public DBTransform transform = new DBTransform();
+		public Point pivot = new Point();
+		public Point scaleOffset = new Point();
+		public ColorTransform color = new ColorTransform();
+
+
+		public TransformFrame ()
 		{
-			base.Dispose();
-			Global = null;
-			Transform = null;
-			//SkeletonData pivots
-			Pivot = null;
-			Color = null;
+			visible = true;
+			tweenScale = true;
+			tweenRotate = 0;
+			displayIndex = 0;
+			zOrder = 0.0f;
+			tweenEasing = DragonBones.NO_TWEEN_EASING;
+			frameType = Frame.FrameType.FT_TRANSFORM_FRAME;
+			color = null;
+
+	    }
 		}
-	}
 }
 

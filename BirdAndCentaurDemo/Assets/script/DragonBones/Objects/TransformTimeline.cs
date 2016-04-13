@@ -9,54 +9,25 @@
 // ------------------------------------------------------------------------------
 using System;
 using Com.Viperstudio.Geom;
-namespace DragonBones.Objects
+namespace DragonBones
 {
-	public class TransformTimeline :Timeline
-	{
-		public static TransformTimeline HIDE_TIMELINE = new TransformTimeline();
-		
-		public bool Transformed;
-		
-		public DBTransform OriginTransform;
-		public Point OriginPivot;
-		
-		private float _offset;
-		public float Offset
+		public class TransformTimeline: Timeline
 		{
-			get { return _offset; }
-			set {
+        public static TransformTimeline HIDE_TIMELINE = new TransformTimeline();
+        public bool transformed;
+		public float offset;
 
-				float r = 0f;
-				if(value!=float.NaN&&value!=0) r = value;
+		public string name;
+		public DBTransform originTransform = new DBTransform();
+		public Point originPivot = new Point();
 
-				_offset = r % 1;
-				if(_offset < 0)
-				{
-					_offset += 1;
-				}
-				 
-				}
-		}
-	
-		
-		public TransformTimeline()
+		public TransformTimeline ()
 		{
+			offset = 0.0f;
+			transformed = false;
+		}
 
-			OriginTransform = new DBTransform();
-			OriginPivot = new Point();
-			_offset = 0;
+
 		}
-		
-		override public void Dispose()
-		{
-			if(this == HIDE_TIMELINE)
-			{
-				return;
-			}
-			base.Dispose();
-			OriginTransform = null;
-			OriginPivot = null;
-		}
-	}
 }
 

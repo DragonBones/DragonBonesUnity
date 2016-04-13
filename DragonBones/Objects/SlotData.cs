@@ -9,72 +9,56 @@
 // ------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-
-namespace DragonBones.Objects
+namespace DragonBones
 {
-	public class SlotData
-	{
-		public string Name;
-		public string Parent;
-		public float ZOrder;
-		public string BlendMode;
-		
-		private List<DisplayData> _displayDataList;
-		public List<DisplayData> DisplayDataList
+		public class SlotData
 		{
-			get { return _displayDataList; }
-		}
-		
-		public SlotData()
-		{
-			_displayDataList = new List<DisplayData>();
-			ZOrder = 0;
-			BlendMode = "normal";
-		}
-		
-		public void Dispose()
-		{
-			int i = _displayDataList.Count;
-			while(i -- >0)
-			{
-				_displayDataList[i].Dispose();
-			}
 
-			_displayDataList.Clear();
 	
-		}
+	    public float zOrder;
 		
-		public void AddDisplayData(DisplayData displayData)
+		public string name;
+		public string parent;
+		public DragonBones.BlendMode blendMode;
+		public List<DisplayData> displayDataList = new List<DisplayData>();
+		public SlotData ()
 		{
-			if(displayData == null)
-			{
-				throw new ArgumentException();
-			}
-			if (_displayDataList.IndexOf(displayData) < 0)
-			{
+			zOrder = 0.0f;
+			blendMode = DragonBones.BlendMode.BM_NORMAL;
 
-				_displayDataList.Add(displayData);
-
-			}
-			else
-			{
-				throw new ArgumentException();
-			}
 		}
+
 		
-		public DisplayData GetDisplayData(string displayName)
+		public void dispose()
 		{
-			int i = _displayDataList.Count;
-			while(i -- >0)
+			zOrder = 0.0f;
+			name = null;
+ 			parent = null;
+			
+			blendMode = DragonBones.BlendMode.BM_NORMAL;
+			
+			//for (int i = 0; i = displayDataList.Count;  ++i)
+			//{
+				//delete displayDataList[i];
+			//}
+			displayDataList.Clear();
+		}
+
+
+		public DisplayData getDisplayData(string displayName) 
+		{
+			for (int i = 0; i < displayDataList.Count;  ++i)
 			{
-				if(_displayDataList[i].Name == displayName)
+				if (displayDataList[i].name == displayName)
 				{
-					return _displayDataList[i];
+					return displayDataList[i];
 				}
 			}
 			
 			return null;
 		}
-	}
+
+
+		}
 }
 

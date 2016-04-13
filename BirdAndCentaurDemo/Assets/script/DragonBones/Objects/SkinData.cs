@@ -9,66 +9,45 @@
 // ------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-namespace DragonBones.Objects
+namespace DragonBones
 {
-	public class SkinData
-	{
-		public string Name;
-		
-		private List<SlotData> _slotDataList;
-		public List<SlotData> SlotDataList
+		public class SkinData
 		{
-			get { return _slotDataList; }
-		}
-		
-		public SkinData()
-		{
-			_slotDataList = new List<SlotData>();
-		}
-		
-		public void Dispose()
-		{
-			int i = _slotDataList.Count;
-			while(i -- >0)
-			{
-				_slotDataList[i].Dispose();
-			}
 
-			_slotDataList.Clear();
+	
+		public string name;
+		public List<SlotData> slotDataList = new List<SlotData>();
 
-		}
-		
-		public SlotData getSlotData(string slotName)
-		{
-			int i = _slotDataList.Count;
-			while(i -- >0)
-			{
-				if(_slotDataList[i].Name == slotName)
+				public SkinData ()
 				{
-					return _slotDataList[i];
 				}
+
+
+
+	public SlotData getSlotData(string slotName) 
+	{
+		for (int i = 0; i < slotDataList.Count; ++i)
+		{
+			if (slotDataList[i].name == slotName)
+			{
+				return slotDataList[i];
 			}
-			return null;
 		}
 		
-		public void AddSlotData(SlotData slotData)
+		return null;
+	}
+
+	public	void dispose()
 		{
-			if(slotData == null)
+			for (int i = 0; i < slotDataList.Count; ++i)
 			{
-				throw new ArgumentException();
+				slotDataList[i].dispose();
+				//delete slotDataList[i];
 			}
 			
-			if (_slotDataList.IndexOf(slotData) < 0)
-			{
-
-				_slotDataList.Add(slotData);
-
-			}
-			else
-			{
-				throw new ArgumentException();
-			}
+			slotDataList.Clear();
 		}
+
 	}
 }
 

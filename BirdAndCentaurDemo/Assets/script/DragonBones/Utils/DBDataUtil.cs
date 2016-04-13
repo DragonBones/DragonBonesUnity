@@ -9,12 +9,10 @@
 // ------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using DragonBones.Animation;
-using DragonBones.Objects;
-using Com.Viperstudio.Geom;
 using Com.Viperstudio.Utils;
+using Com.Viperstudio.Geom;
 
-namespace DragonBones.Utils
+namespace DragonBones
 {
 	public class DBDataUtil
 	{
@@ -23,28 +21,30 @@ namespace DragonBones.Utils
 		
 		public static void TransformArmatureData(ArmatureData armatureData)
 		{
-			List<BoneData> boneDataList = armatureData.BoneDataList;
+			List<BoneData> boneDataList = armatureData.boneDataList;
 			int i = boneDataList.Count;
 			BoneData boneData;
 			BoneData parentBoneData;
 			while(i -- >0)
 			{
+                
 				boneData = boneDataList[i];
-				if(boneData.Parent!=null)
+				if(boneData.parent!=null)
 				{
-					parentBoneData = armatureData.GetBoneData(boneData.Parent);
+					parentBoneData = armatureData.getBoneData(boneData.parent);
 					if(parentBoneData!=null)
 					{
-						boneData.Transform.Copy(boneData.Global);
+						boneData.transform.Copy(boneData.global);
 
-						//Logger.Log(boneData.Name + "  " + boneData.Transform.X + "  " + boneData.Transform.Y);
-						TransformUtil.TransformPointWithParent(boneData.Transform, parentBoneData.Global);
-						//Logger.Log(boneData.Name + "  " + boneData.Transform.X + "  " + boneData.Transform.Y);
+						//Logger.Log(boneData.name + "  " + boneData.transform.X + "  " + boneData.transform.Y);
+						TransformUtil.TransformPointWithParent(boneData.transform, parentBoneData.global);
+						//Logger.Log(boneData.name + "  " + boneData.transform.X + "  " + boneData.transform.Y);
 					}
 				}
 			}
 		}
 		
+        /*
 		public static void transformArmatureDataAnimations(ArmatureData armatureData)
 		{
 			List<AnimationData> animationDataList = armatureData.AnimationDataList;
@@ -54,12 +54,13 @@ namespace DragonBones.Utils
 				TransformAnimationData(animationDataList[i], armatureData);
 			}
 		}
+        */
 		
 		public static void TransformAnimationData(AnimationData animationData, ArmatureData armatureData)
 		{
-			SkinData skinData = armatureData.GetSkinData(null);
-			List<BoneData> boneDataList = armatureData.BoneDataList;
-			List<SlotData> slotDataList = skinData.SlotDataList;
+			SkinData skinData = armatureData.getSkinData("");
+			List<BoneData> boneDataList = armatureData.boneDataList;
+			List<SlotData> slotDataList = skinData.slotDataList;
 			int i = boneDataList.Count;
 			
 			BoneData boneData;
@@ -76,8 +77,9 @@ namespace DragonBones.Utils
 			
 			while(i -- >0)
 			{
+								
 				boneData = boneDataList[i];
-				timeline = animationData.GetTimeline(boneData.Name);
+				timeline = animationData.getTimeline(boneData.name);
 				if(timeline == null)
 				{
 					continue;
@@ -86,7 +88,7 @@ namespace DragonBones.Utils
 				slotData = null;
 				foreach(SlotData slotDataObj in slotDataList)
 				{
-					if(slotDataObj.Parent == boneData.Name)
+					if(slotDataObj.parent == boneData.name)
 					{
 
 						slotData = slotDataObj;
@@ -94,9 +96,9 @@ namespace DragonBones.Utils
 					}
 				}
 				
-				parentTimeline = boneData.Parent!=null?animationData.GetTimeline(boneData.Parent):null;
+				parentTimeline = boneData.parent!=null?animationData.getTimeline(boneData.parent):null;
 				
-				frameList = timeline.FrameList;
+				frameList = timeline.frameList;
 				
 				originTransform = null;
 				originPivot = null;
@@ -108,111 +110,111 @@ namespace DragonBones.Utils
 					if(parentTimeline!=null)
 					{
 						//tweenValues to transform.
-						_helpTransform1.Copy(frame.Global);
+						_helpTransform1.Copy(frame.global);
 						
 						//get transform from parent timeline.
-						GetTimelineTransform(parentTimeline, frame.Position, _helpTransform2);
+						GetTimelineTransform(parentTimeline, frame.position, _helpTransform2);
 						TransformUtil.TransformPointWithParent(_helpTransform1, _helpTransform2);
 						
 						//transform to tweenValues.
-						frame.Transform.Copy(_helpTransform1);
+						frame.transform.Copy(_helpTransform1);
 					}
 					else
 					{
-						frame.Transform.Copy(frame.Global);
+						frame.transform.Copy(frame.global);
 					}
 
-					frame.Transform.X -= boneData.Transform.X;
-					frame.Transform.Y -= boneData.Transform.Y;
-					frame.Transform.SkewX -= boneData.Transform.SkewX;
-					frame.Transform.SkewY -= boneData.Transform.SkewY;
-					frame.Transform.ScaleX -= boneData.Transform.ScaleX;
-					frame.Transform.ScaleY -= boneData.Transform.ScaleY;
+					frame.transform.X -= boneData.transform.X;
+					frame.transform.Y -= boneData.transform.Y;
+					frame.transform.SkewX -= boneData.transform.SkewX;
+					frame.transform.SkewY -= boneData.transform.SkewY;
+					frame.transform.ScaleX -= boneData.transform.ScaleX;
+					frame.transform.ScaleY -= boneData.transform.ScaleY;
 					
-					if(!timeline.Transformed)
+					if(!timeline.transformed)
 					{
 						if(slotData!=null)
 						{
-							frame.ZOrder -= slotData.ZOrder;
+							frame.zOrder -= slotData.zOrder;
 						}
 					}
 					
 					if(originTransform == null)
 					{
-						originTransform = timeline.OriginTransform;
-						originTransform.Copy(frame.Transform);
+						originTransform = timeline.originTransform;
+						originTransform.Copy(frame.transform);
 						originTransform.SkewX = TransformUtil.FormatRadian(originTransform.SkewX);
 						originTransform.SkewY = TransformUtil.FormatRadian(originTransform.SkewY);
-						originPivot = timeline.OriginPivot;
-						originPivot.X = frame.Pivot.X;
-						originPivot.Y = frame.Pivot.Y;
+						originPivot = timeline.originPivot;
+						originPivot.X = frame.pivot.X;
+						originPivot.Y = frame.pivot.Y;
 					}
 					
-					frame.Transform.X -= originTransform.X;
-					frame.Transform.Y -= originTransform.Y;
-					frame.Transform.SkewX = TransformUtil.FormatRadian(frame.Transform.SkewX - originTransform.SkewX);
-					frame.Transform.SkewY = TransformUtil.FormatRadian(frame.Transform.SkewY - originTransform.SkewY);
-					frame.Transform.ScaleX -= originTransform.ScaleX;
-					frame.Transform.ScaleY -= originTransform.ScaleY;
+					frame.transform.X -= originTransform.X;
+					frame.transform.Y -= originTransform.Y;
+					frame.transform.SkewX = TransformUtil.FormatRadian(frame.transform.SkewX - originTransform.SkewX);
+					frame.transform.SkewY = TransformUtil.FormatRadian(frame.transform.SkewY - originTransform.SkewY);
+					frame.transform.ScaleX -= originTransform.ScaleX;
+					frame.transform.ScaleY -= originTransform.ScaleY;
 
-					if(!timeline.Transformed)
+					if(!timeline.transformed)
 					{
-						frame.Pivot.Y -= originPivot.X;
-						frame.Pivot.Y -= originPivot.Y;
+						frame.pivot.Y -= originPivot.X;
+						frame.pivot.Y -= originPivot.Y;
 					}
 					
 					if(prevFrame!=null)
 					{
-						float dLX = frame.Transform.SkewX - prevFrame.Transform.SkewX;
+						float dLX = frame.transform.SkewX - prevFrame.transform.SkewX;
 						
-						if(prevFrame.TweenRotate!=0)
+						if(prevFrame.tweenRotate!=0)
 						{
 							
-							if(prevFrame.TweenRotate > 0)
+							if(prevFrame.tweenRotate > 0)
 							{
 								if(dLX < 0)
 								{
-									frame.Transform.SkewX += (float)Math.PI * 2f;
-									frame.Transform.SkewY += (float)Math.PI * 2f;
+									frame.transform.SkewX += (float)Math.PI * 2f;
+									frame.transform.SkewY += (float)Math.PI * 2f;
 								}
 								
-								if(prevFrame.TweenRotate > 1)
+								if(prevFrame.tweenRotate > 1)
 								{
-									frame.Transform.SkewX += (float)Math.PI * 2f * ((float)prevFrame.TweenRotate - 1f);
-									frame.Transform.SkewY += (float)Math.PI * 2f * ((float)prevFrame.TweenRotate - 1f);
+									frame.transform.SkewX += (float)Math.PI * 2f * ((float)prevFrame.tweenRotate - 1f);
+									frame.transform.SkewY += (float)Math.PI * 2f * ((float)prevFrame.tweenRotate - 1f);
 								}
 							}
 							else
 							{
 								if(dLX > 0)
 								{
-									frame.Transform.SkewX -= (float)Math.PI * 2f;
-									frame.Transform.SkewY -= (float)Math.PI * 2f;
+									frame.transform.SkewX -= (float)Math.PI * 2f;
+									frame.transform.SkewY -= (float)Math.PI * 2f;
 								}
 								
-								if(prevFrame.TweenRotate < 1)
+								if(prevFrame.tweenRotate < 1)
 								{
-									frame.Transform.SkewX += (float)Math.PI * 2f * ((float)prevFrame.TweenRotate + 1f);
-									frame.Transform.SkewY += (float)Math.PI * 2f * ((float)prevFrame.TweenRotate + 1f);
+									frame.transform.SkewX += (float)Math.PI * 2f * ((float)prevFrame.tweenRotate + 1f);
+									frame.transform.SkewY += (float)Math.PI * 2f * ((float)prevFrame.tweenRotate + 1f);
 								}
 							}
 						}
 						else
 						{
-							frame.Transform.SkewX = prevFrame.Transform.SkewX + TransformUtil.FormatRadian(frame.Transform.SkewX - prevFrame.Transform.SkewX);
-							frame.Transform.SkewY = prevFrame.Transform.SkewY + TransformUtil.FormatRadian(frame.Transform.SkewY - prevFrame.Transform.SkewY);
+							frame.transform.SkewX = prevFrame.transform.SkewX + TransformUtil.FormatRadian(frame.transform.SkewX - prevFrame.transform.SkewX);
+							frame.transform.SkewY = prevFrame.transform.SkewY + TransformUtil.FormatRadian(frame.transform.SkewY - prevFrame.transform.SkewY);
 						}
 					}
 					
 					prevFrame = frame;
 				}
-				timeline.Transformed = true;
+				timeline.transformed = true;
 			}
 		}
 		
 		public static void GetTimelineTransform(TransformTimeline timeline, float position, DBTransform retult)
 		{
-			List<Frame> frameList = timeline.FrameList;
+			List<Frame> frameList = timeline.frameList;
 			int i = frameList.Count;
 			
 			TransformFrame currentFrame;
@@ -222,16 +224,16 @@ namespace DragonBones.Utils
 			while(i -- >0)
 			{
 				currentFrame = frameList[i] as TransformFrame;
-				if(currentFrame.Position <= position && currentFrame.Position + currentFrame.Duration > position)
+				if(currentFrame.position <= position && currentFrame.position + currentFrame.duration > position)
 				{
-					tweenEasing = currentFrame.TweenEasing;
-					if(i == frameList.Count - 1 || float.IsNaN(tweenEasing) || position == currentFrame.Position)
+					tweenEasing = currentFrame.tweenEasing;
+					if(i == frameList.Count - 1 || float.IsNaN(tweenEasing) || position == currentFrame.position)
 					{
-						retult.Copy(currentFrame.Global);
+						retult.Copy(currentFrame.global);
 					}
 					else
 					{
-						progress = (position - currentFrame.Position) / currentFrame.Duration;
+						progress = (position - currentFrame.position) / currentFrame.duration;
 						if(tweenEasing!=0&&!float.IsNaN(tweenEasing))
 						{
 							progress = TimelineState.GetEaseValue(progress, tweenEasing);
@@ -239,12 +241,12 @@ namespace DragonBones.Utils
 						
 						nextFrame = frameList[i + 1] as TransformFrame;
 						
-						retult.X = currentFrame.Global.X +  (nextFrame.Global.X - currentFrame.Global.X) * progress;
-						retult.Y = currentFrame.Global.Y +  (nextFrame.Global.Y - currentFrame.Global.Y) * progress;
-						retult.SkewX = TransformUtil.FormatRadian(currentFrame.Global.SkewX +  (nextFrame.Global.SkewX - currentFrame.Global.SkewX) * progress);
-						retult.SkewY = TransformUtil.FormatRadian(currentFrame.Global.SkewY +  (nextFrame.Global.SkewY - currentFrame.Global.SkewY) * progress);
-						retult.ScaleX = currentFrame.Global.ScaleX +  (nextFrame.Global.ScaleX - currentFrame.Global.ScaleX) * progress;
-						retult.ScaleY = currentFrame.Global.ScaleY +  (nextFrame.Global.ScaleY - currentFrame.Global.ScaleY) * progress;
+						retult.X = currentFrame.global.X +  (nextFrame.global.X - currentFrame.global.X) * progress;
+						retult.Y = currentFrame.global.Y +  (nextFrame.global.Y - currentFrame.global.Y) * progress;
+						retult.SkewX = TransformUtil.FormatRadian(currentFrame.global.SkewX +  (nextFrame.global.SkewX - currentFrame.global.SkewX) * progress);
+						retult.SkewY = TransformUtil.FormatRadian(currentFrame.global.SkewY +  (nextFrame.global.SkewY - currentFrame.global.SkewY) * progress);
+						retult.ScaleX = currentFrame.global.ScaleX +  (nextFrame.global.ScaleX - currentFrame.global.ScaleX) * progress;
+						retult.ScaleY = currentFrame.global.ScaleY +  (nextFrame.global.ScaleY - currentFrame.global.ScaleY) * progress;
 					}
 					break;
 				}
@@ -253,7 +255,7 @@ namespace DragonBones.Utils
 		
 		public static void AddHideTimeline(AnimationData animationData, ArmatureData armatureData)
 		{
-			List<BoneData> boneDataList =armatureData.BoneDataList;
+			List<BoneData> boneDataList =armatureData.boneDataList;
 			int i = boneDataList.Count;
 			
 			BoneData boneData;
@@ -261,8 +263,8 @@ namespace DragonBones.Utils
 			while(i -- >0)
 			{
 				boneData = boneDataList[i];
-				boneName = boneData.Name;
-				if(animationData.GetTimeline(boneName)==null)
+				boneName = boneData.name;
+				if(animationData.getTimeline(boneName)==null)
 				{
 					animationData.AddTimeline(TransformTimeline.HIDE_TIMELINE, boneName);
 				}

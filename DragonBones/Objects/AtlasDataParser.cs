@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using DragonBones.Utils;
 using Com.Viperstudio.Utils;
 
-namespace DragonBones.Objects
+namespace DragonBones
 {
 	public class AtlasDataParser
 	{
@@ -22,20 +22,19 @@ namespace DragonBones.Objects
 		}
 
 
-		public static AtlasData ParseAtlasData(Dictionary<string, Object> rawData)
+		public static TextureAtlasData ParseAtlasData(Dictionary<string, Object> rawData)
 		{
 			if(rawData == null)
 			{
 				throw new ArgumentException();
 			}
 
-			AtlasData data = new AtlasData();
-			data.Name = rawData[ConstValues.A_NAME] as String;
+            TextureAtlasData data = new TextureAtlasData();
+			data.name = rawData[ConstValues.A_NAME] as String;
 
 			foreach(Dictionary<String, Object> textureObject in rawData[ConstValues.A_SUBTEXTURE] as List<Object>)
 			{
-				
-				data.AddTextureData(parseTextureData(textureObject as Dictionary<string, object>));
+				data.textureDataList.Add(parseTextureData(textureObject as Dictionary<string, object>));
 			}
 			
 			return data;
@@ -45,11 +44,11 @@ namespace DragonBones.Objects
 		private static TextureData parseTextureData(Dictionary<string, object> textureRawData)
 		{
 			TextureData textureData = new TextureData();
-			textureData.Name = textureRawData[ConstValues.A_NAME].ToString();	
-			textureData.X = float.Parse(textureRawData[ConstValues.A_X].ToString());
-			textureData.Y = float.Parse(textureRawData[ConstValues.A_Y].ToString());
-			textureData.Width = float.Parse(textureRawData[ConstValues.A_WIDTH].ToString());
-			textureData.Height = float.Parse(textureRawData[ConstValues.A_HEIGHT].ToString());
+			textureData.name = textureRawData[ConstValues.A_NAME].ToString();	
+			textureData.region.x = float.Parse(textureRawData[ConstValues.A_X].ToString());
+			textureData.region.y = float.Parse(textureRawData[ConstValues.A_Y].ToString());
+			textureData.region.width = float.Parse(textureRawData[ConstValues.A_WIDTH].ToString());
+			textureData.region.height = float.Parse(textureRawData[ConstValues.A_HEIGHT].ToString());
 			return textureData;
 			
 		}

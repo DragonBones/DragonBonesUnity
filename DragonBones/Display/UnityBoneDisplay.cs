@@ -10,9 +10,9 @@
 using System;
 using UnityEngine;
 using DragonBones.Textures;
-using DragonBones.Objects;
+using DragonBones;
 
-namespace DragonBones.Display
+namespace DragonBones
 {
 	public class UnityBoneDisplay
 	{
@@ -45,13 +45,13 @@ namespace DragonBones.Display
 		public void Update(Com.Viperstudio.Geom.Matrix matrix)
 		{
 			//TODO: vetex updating
-
+            
 			for(int i=0;i<8;i+=2)
 			{
 				_vertices[i] = _verticesOrigin[i] * matrix.A +  _verticesOrigin[i+1] * matrix.C + matrix.Tx ;
 				_vertices[i + 1] = -(_verticesOrigin[i] * matrix.B + _verticesOrigin[i+1] * matrix.D + matrix.Ty) ;
-				                        
-			}
+               
+            }
 		
 
 		}
@@ -60,7 +60,7 @@ namespace DragonBones.Display
 		{
 		}
 
-		public UnityBoneDisplay (TextureAtlas textureAtlas, string fullName, float pivotX, float pivotY)
+		public UnityBoneDisplay (TextureAtlas textureAtlas, TextureData textureData, float pivotX, float pivotY)
 		{
 			//TODO: build vetex and mesh
 			PivotX = pivotX;
@@ -68,26 +68,25 @@ namespace DragonBones.Display
 			_uvs = new float[8];
 			_verticesOrigin = new float[8];
 			_vertices = new float[8];
-			TextureData textureData = textureAtlas.AtlasData.GetTextureData (fullName);
 
-			_uvs [0] = textureData.X / (float)textureAtlas.Texture.width;
-		    _uvs [1] = 1-textureData.Y / (float)textureAtlas.Texture.height;
-			_uvs [2] = (textureData.X +textureData.Width)  / (float)textureAtlas.Texture.width;
-			_uvs [3] = 1-textureData.Y / (float)textureAtlas.Texture.height;
-			_uvs [4] = (textureData.X +textureData.Width)  / (float)textureAtlas.Texture.width;
-		    _uvs [5] = 1-(textureData.Y + textureData.Height) / (float)textureAtlas.Texture.height;
-			_uvs [6] = textureData.X / (float)textureAtlas.Texture.width;
-		    _uvs [7] = 1-(textureData.Y + textureData.Height) / (float)textureAtlas.Texture.height;
+			_uvs [0] = textureData.region.x / (float)textureAtlas.Texture.width;
+		    _uvs [1] = 1-textureData.region.y / (float)textureAtlas.Texture.height;
+			_uvs [2] = (textureData.region.x + textureData.region.width)  / (float)textureAtlas.Texture.width;
+			_uvs [3] = 1-textureData.region.y / (float)textureAtlas.Texture.height;
+			_uvs [4] = (textureData.region.x +textureData.region.width)  / (float)textureAtlas.Texture.width;
+		    _uvs [5] = 1-(textureData.region.y + textureData.region.height) / (float)textureAtlas.Texture.height;
+			_uvs [6] = textureData.region.x / (float)textureAtlas.Texture.width;
+		    _uvs [7] = 1-(textureData.region.y + textureData.region.height) / (float)textureAtlas.Texture.height;
 
 		
 			_vertices[0] = _verticesOrigin [0] = -pivotX;
 		    _vertices[1] = _verticesOrigin [1] = -pivotY;
-			_vertices[2] = _verticesOrigin [2] = textureData.Width-pivotX;
+			_vertices[2] = _verticesOrigin [2] = textureData.region.width-pivotX;
 		    _vertices[3] = _verticesOrigin [3] = -pivotY;
-			_vertices[4] = _verticesOrigin [4] = textureData.Width-pivotX ;
-			_vertices[5] = _verticesOrigin [5] = textureData.Height-pivotY;
+			_vertices[4] = _verticesOrigin [4] = textureData.region.width -pivotX ;
+			_vertices[5] = _verticesOrigin [5] = textureData.region.height -pivotY;
 			_vertices[6] = _verticesOrigin [6] = -pivotX;
-			_vertices[7] = _verticesOrigin [7] = textureData.Height-pivotY;
+			_vertices[7] = _verticesOrigin [7] = textureData.region.height -pivotY;
 
 			//Debug.Log("added");
 

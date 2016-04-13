@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using DragonBones.Textures;
 using UnityEngine;
 
-namespace DragonBones.Display
+namespace DragonBones
 {
 	public class UnityArmatureDisplay 
 	{
@@ -33,11 +33,11 @@ namespace DragonBones.Display
 		public UnityArmatureDisplay (TextureAtlas atlas)
 		{
 			_display = new GameObject ();
-			filter = _display.AddComponent("MeshFilter") as MeshFilter;
-			_display.AddComponent("MeshRenderer");
+			filter = _display.AddComponent<MeshFilter>() as MeshFilter;
+			_display.AddComponent<MeshRenderer>();
 			mesh = new Mesh();
 			filter.sharedMesh = mesh;
-			_display.renderer.sharedMaterial = atlas.Material;
+			_display.GetComponent<Renderer>().sharedMaterial = atlas.Material;
 
 		}
 
@@ -45,7 +45,7 @@ namespace DragonBones.Display
 		public void UpdateDisplay(List<Slot> slotList)
 		{
 			//TODO:submeshes clear then update
-
+            
 			mesh.Clear();
 
 			int vertexIndex = 0;
@@ -57,17 +57,19 @@ namespace DragonBones.Display
 
 			for (int i = 0; i < slotList.Count; i++) {
 
-				Slot slot = slotList[i];
-				float[] slotVertices = (slot.Display as UnityBoneDisplay).Vetices;
-				float[] slotUVs = (slot.Display as UnityBoneDisplay).UVs;
+
+                //if the vetex order is not follow the z oder the edge of sprite will break
+				Slot slot = slotList[slotList.Count - i - 1];
+				float[] slotVertices = (slot.getDisplay() as UnityBoneDisplay).Vetices;
+				float[] slotUVs = (slot.getDisplay() as UnityBoneDisplay).UVs;
 
 				vertexIndex = i * 4;
 				triangleIndex  = -(i +1) * 6;
 
-                vertices[vertexIndex] = new Vector3(slotVertices[0] / 100, slotVertices[1] / 100, -slot.ZOrder * 0.001f);  // 2d mode, z more bigger more bottom
-                vertices[vertexIndex + 1] = new Vector3(slotVertices[2] / 100, slotVertices[3] / 100, -slot.ZOrder * 0.001f);
-                vertices[vertexIndex + 2] = new Vector3(slotVertices[4] / 100, slotVertices[5] / 100, -slot.ZOrder * 0.001f);
-                vertices[vertexIndex + 3] = new Vector3(slotVertices[6] / 100, slotVertices[7] / 100, -slot.ZOrder * 0.001f);
+                vertices[vertexIndex] = new Vector3(slotVertices[0] / 100, slotVertices[1] / 100, -slot.getZOrder() * 0.001f);  // 2d mode, z more bigger more bottom
+                vertices[vertexIndex + 1] = new Vector3(slotVertices[2] / 100, slotVertices[3] / 100, -slot.getZOrder() * 0.001f);
+                vertices[vertexIndex + 2] = new Vector3(slotVertices[4] / 100, slotVertices[5] / 100, -slot.getZOrder() * 0.001f);
+                vertices[vertexIndex + 3] = new Vector3(slotVertices[6] / 100, slotVertices[7] / 100, -slot.getZOrder() * 0.001f);
 					
 				uvs[vertexIndex] = new Vector2(slotUVs[0], slotUVs[1]);
 				uvs[vertexIndex + 1] = new Vector2(slotUVs[2], slotUVs[3]);
@@ -80,15 +82,16 @@ namespace DragonBones.Display
 				triangles[triangleCount  + triangleIndex + 3] = vertexIndex  +2;
 				triangles[triangleCount + triangleIndex + 4] = vertexIndex + 3;
 				triangles[triangleCount + triangleIndex + 5] = vertexIndex + 0;
-
-			}
-			/*
+                
+            }
+           
+            /*
 			Vector3[] normals = new Vector3[slotList.Count*4];
 			Vector3 normal = new Vector3(0, 0, -1);
 			for (int i = 0; i < slotList.Count*4; i++)
 				normals[i] = normal;
             */
-			if(colors == null)
+            if (colors == null)
 			{
 			 colors = new Color32[slotList.Count*4];
 			 Color32 color = new Color32();
@@ -105,14 +108,14 @@ namespace DragonBones.Display
 			for (int i = 0; i < slotList.Count*4; i++)
 				tangents[i] = tangent;
             */
-
+            
 			mesh.vertices = vertices;
 			mesh.uv = uvs;
 			mesh.triangles = triangles;
 			//mesh.normals = normals;
 			//mesh.tangents = tangents;
 			mesh.colors32 = colors;
-
+            
 		}
 	}
 }
