@@ -57,7 +57,7 @@ namespace LastCastle
 					float r0 = (float)random.NextDouble() + 0.5f;
 					float r1 = 0;//(float)random.NextDouble();
 					float r2 = (float)random.NextDouble();
-					((armature.getDisplay() as UnityArmatureDisplay).Display as GameObject).transform.position = new Vector3((float)j+r0 * 20f, 1,  r2 * 15f);
+					((armature.getDisplay() as UnityArmatureDisplay).Display as GameObject).transform.position = new Vector3((float)j+r0 * 50f, 1,  r2 * 50f);
 					WorldClock.clock.add (armature);
 					armature.getAnimation().gotoAndPlay ("run", -1, -1, 0);
 				}
@@ -71,7 +71,7 @@ namespace LastCastle
 				float r0 = (float)random.NextDouble() + 0.5f;
 				float r1 = (float)random.NextDouble() + 1;
 				float r2 = (float)random.NextDouble();
-				((armature.getDisplay() as UnityArmatureDisplay).Display as GameObject).transform.position = new Vector3((float)j+r0*20f, (float)i*3f+r1*5f, r2*15f);
+				((armature.getDisplay() as UnityArmatureDisplay).Display as GameObject).transform.position = new Vector3((float)j+r0*50f, (float)i*1f+r1*5f, r2*50f);
 				WorldClock.clock.add (armature);
 				armature._animation.gotoAndPlay ("fly", -1, -1, 0);
 				}

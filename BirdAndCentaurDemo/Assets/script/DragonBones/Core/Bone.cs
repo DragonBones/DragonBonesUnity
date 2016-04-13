@@ -246,6 +246,8 @@ namespace DragonBones
 				global.SkewY = origin.SkewY + offset.SkewY + _tween.SkewY;
 			}
 
+          
+
            globalTransformMatrix.A = offset.ScaleX * (float)Math.Cos(global.SkewY);
 			globalTransformMatrix.B = offset.ScaleX * (float)Math.Sin(global.SkewY);
 			globalTransformMatrix.C = -offset.ScaleY * (float)Math.Sin(global.SkewX);

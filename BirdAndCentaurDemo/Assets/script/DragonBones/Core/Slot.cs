@@ -174,45 +174,57 @@ namespace DragonBones
 				return;
 			}
 
-            //Logger.Log(name  + " " + _parent.origin.X + " " + origin.X );
+            if(origin.X == 0 && origin.Y == 0 &&
+               offset.X == 0 && offset.Y == 0 &&
+               origin.SkewX == 0 && origin.SkewY == 0 &&
+               offset.SkewX == 0 && offset.SkewY == 0 &&
+               origin.ScaleX == 1f && origin.ScaleY == 1f &&
+               offset.ScaleX == 1f && offset.ScaleY == 1f
+                )
+            {
+                globalTransformMatrix = _parent.globalTransformMatrix;
+                updateDisplayTransform();
+                return;
+            }
 
-            float x = origin.X + offset.X + _parent._tweenPivot.X;
-            float y = origin.Y + offset.Y + _parent._tweenPivot.Y;
-			Com.Viperstudio.Geom.Matrix parentMatrix = _parent.globalTransformMatrix;
+             float x = origin.X + offset.X + _parent._tweenPivot.X;
+             float y = origin.Y + offset.Y + _parent._tweenPivot.Y;
+             Com.Viperstudio.Geom.Matrix parentMatrix = _parent.globalTransformMatrix;
 
-            //globalTransformMatrix.Tx = global.X = parentMatrix.A * x + parentMatrix.C * y  + parentMatrix.Tx;
-            //globalTransformMatrix.Ty = global.Y = parentMatrix.D * y + parentMatrix.B * x  + parentMatrix.Ty;
-            globalTransformMatrix.Tx = global.X = parentMatrix.A * x * _parent.global.ScaleX + parentMatrix.C * y * _parent.global.ScaleY + parentMatrix.Tx;
-            globalTransformMatrix.Ty = global.Y = parentMatrix.D * y * _parent.global.ScaleY + parentMatrix.B * x * _parent.global.ScaleX + parentMatrix.Ty;
-			   
-			if (inheritRotation)
-			{
-				global.SkewX = origin.SkewX + offset.SkewX + _parent.global.SkewX;
-				global.SkewY = origin.SkewY + offset.SkewY + _parent.global.SkewY;
-			}
-			else
-			{
-				global.SkewX = origin.SkewX + offset.SkewX;
-				global.SkewY = origin.SkewY + offset.SkewY;
-			}
+             //globalTransformMatrix.Tx = global.X = parentMatrix.A * x + parentMatrix.C * y  + parentMatrix.Tx;
+             //globalTransformMatrix.Ty = global.Y = parentMatrix.D * y + parentMatrix.B * x  + parentMatrix.Ty;
+             globalTransformMatrix.Tx = global.X = parentMatrix.A * x * _parent.global.ScaleX + parentMatrix.C * y * _parent.global.ScaleY + parentMatrix.Tx;
+             globalTransformMatrix.Ty = global.Y = parentMatrix.D * y * _parent.global.ScaleY + parentMatrix.B * x * _parent.global.ScaleX + parentMatrix.Ty;
 
-			if (inheritScale)
-			{
-				global.ScaleX = origin.ScaleX * offset.ScaleX * _parent.global.ScaleX;
-				global.ScaleY = origin.ScaleY * offset.ScaleY * _parent.global.ScaleY;
-			}
-			else
-			{
-				global.ScaleX = origin.ScaleX * offset.ScaleX;
-				global.ScaleY = origin.ScaleY * offset.ScaleY;
-			}
-			
-			globalTransformMatrix.A = global.ScaleX * (float)Math.Cos(global.SkewY);
-			globalTransformMatrix.B = global.ScaleX * (float)Math.Sin(global.SkewY);
-			globalTransformMatrix.C = -global.ScaleY * (float)Math.Sin(global.SkewX);
-			globalTransformMatrix.D = global.ScaleY * (float)Math.Cos(global.SkewX);
-            
-			updateDisplayTransform();
+             if (inheritRotation)
+             {
+                 global.SkewX = origin.SkewX + offset.SkewX + _parent.global.SkewX;
+                 global.SkewY = origin.SkewY + offset.SkewY + _parent.global.SkewY;
+             }
+             else
+             {
+                 global.SkewX = origin.SkewX + offset.SkewX;
+                 global.SkewY = origin.SkewY + offset.SkewY;
+             }
+
+             if (inheritScale)
+             {
+                 global.ScaleX = origin.ScaleX * offset.ScaleX * _parent.global.ScaleX;
+                 global.ScaleY = origin.ScaleY * offset.ScaleY * _parent.global.ScaleY;
+             }
+             else
+             {
+                 global.ScaleX = origin.ScaleX * offset.ScaleX;
+                 global.ScaleY = origin.ScaleY * offset.ScaleY;
+             }
+
+             globalTransformMatrix.A = global.ScaleX * (float)Math.Cos(global.SkewY);
+             globalTransformMatrix.B = global.ScaleX * (float)Math.Sin(global.SkewY);
+             globalTransformMatrix.C = -global.ScaleY * (float)Math.Sin(global.SkewX);
+             globalTransformMatrix.D = global.ScaleY * (float)Math.Cos(global.SkewX);
+             
+         
+            updateDisplayTransform();
 		}
 
 
@@ -443,9 +455,9 @@ namespace DragonBones
 		}
 		protected virtual void updateDisplayTransform()
 		{
-     
-            ((UnityBoneDisplay)_display).Update(this.globalTransformMatrix);
-            
+
+             ((UnityBoneDisplay)_display).Update(this.globalTransformMatrix);
+           // ((UnityBoneDisplay)_display).Update(_parent.globalTransformMatrix);
         }
 
 		public void dispose()
