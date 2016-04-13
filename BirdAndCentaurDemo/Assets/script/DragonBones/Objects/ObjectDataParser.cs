@@ -196,7 +196,7 @@ namespace DragonBones
 					tweenEase == null
 					)
 				{
-					animationData.tweenEasing = float.NaN;
+                    animationData.tweenEasing = DragonBones.NO_TWEEN_EASING;
 				}
 				else
 				{
@@ -314,7 +314,7 @@ namespace DragonBones
 					tweenEase == null
 					)
 				{
-					frame.tweenEasing = float.NaN;
+                    frame.tweenEasing = DragonBones.NO_TWEEN_EASING;
 				}
 				else
 				{
@@ -323,7 +323,7 @@ namespace DragonBones
 			}
 			else
 			{
-				frame.tweenEasing = 0f;
+                frame.tweenEasing = DragonBones.AUTO_TWEEN_EASING;
 			}
 
 			if(frameObject.ContainsKey(ConstValues.A_TWEEN_ROTATE))

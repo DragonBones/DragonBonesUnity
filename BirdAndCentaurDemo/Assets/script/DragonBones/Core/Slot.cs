@@ -173,7 +173,7 @@ namespace DragonBones
 			{
 				return;
 			}
-
+            
             if(origin.X == 0 && origin.Y == 0 &&
                offset.X == 0 && offset.Y == 0 &&
                origin.SkewX == 0 && origin.SkewY == 0 &&
@@ -186,7 +186,7 @@ namespace DragonBones
                 updateDisplayTransform();
                 return;
             }
-
+            
              float x = origin.X + offset.X + _parent._tweenPivot.X;
              float y = origin.Y + offset.Y + _parent._tweenPivot.Y;
              Com.Viperstudio.Geom.Matrix parentMatrix = _parent.globalTransformMatrix;
