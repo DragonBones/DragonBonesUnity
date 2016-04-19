@@ -9,6 +9,7 @@
 // ------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using Com.Viperstudio.Utils;
 namespace DragonBones
 {
 	public class Animation
@@ -321,7 +322,7 @@ namespace DragonBones
 			}
 			
 			_isFading = isFading;
-
+            
 		}
 		
 		public virtual bool hasAnimation(string animationName)
@@ -389,6 +390,42 @@ namespace DragonBones
 				_animationStateList[i].updateTimelineStates();
 			}
 		}
+
+        public void cacheAnimation(String name, int fps)
+        {
+            AnimationData animationData = null;
+            for (int i = 0; i < _animationDataList.Count; ++i)
+            {
+                if (_animationDataList[i].name == name)
+                {
+                    animationData = _animationDataList[i];
+                    break;
+                }
+            }
+            if (animationData == null)
+            {
+                //assert (0);
+                //throw std::runtime_error("No animation data.");
+                return ;
+            }
+
+            /*
+            foreach (var item in _lastAnimationState)
+            {
+
+            }
+            */
+            int frameNum = animationData.duration * 1000 / fps;
+            for (int i = 0; i < frameNum; i++)
+            {
+                this.advanceTime(1 / fps);
+            }
+        }
+
+        public void uncacheAnimation(String name)
+        {
+
+        }
 
 		public void dispose()
 		{

@@ -77,7 +77,7 @@ namespace DragonBones
 		
 	
 		public	string name;
-		
+        public bool isCached;
 	
 		public 	bool _blendEnabled;
 		public bool _isComplete;
@@ -621,10 +621,7 @@ namespace DragonBones
 					_transform.SkewX = _originTransform.SkewX + currentTransform.SkewX + _durationTransform.SkewX * progress;
 					_transform.SkewY = _originTransform.SkewY + currentTransform.SkewY + _durationTransform.SkewY * progress;
 
-                    //if(_timeline.name == "man-weapon")
-                    //  Logger.Log(currentTransform.SkewX + " " + _durationTransform.SkewX + "  " + progress);
-
-                    if (_tweenScale)
+                   if (_tweenScale)
 					{
 						_transform.ScaleX = _originTransform.ScaleX + currentTransform.ScaleX + _durationTransform.ScaleX * progress;
 						_transform.ScaleY = _originTransform.ScaleY + currentTransform.ScaleY + _durationTransform.ScaleY * progress;

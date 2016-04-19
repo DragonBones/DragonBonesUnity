@@ -50,8 +50,8 @@ namespace LastCastle
             
 			System.Random random = new System.Random();
             
-			for (int i=0; i<20; i++) {
-				for (int j=0; j<20; j++) {
+			for (int i=0; i<1; i++) {
+				for (int j=0; j<1; j++) {
 					Armature armature = factory.buildArmature ("centaur/charactor", "charactor_all");
 					armature.advanceTime (0f);
 					float r0 = (float)random.NextDouble() + 0.5f;
@@ -64,8 +64,8 @@ namespace LastCastle
 			}
             
             //add 20 bird into scene at some random positions.
-            for (int i=0; i<20; i++) {
-				for (int j=0; j<20; j++) {
+            for (int i=0; i<0; i++) {
+				for (int j=0; j<10; j++) {
 				Armature armature = factory.buildArmature ("bird/charactor", "charactor_all");
 				armature.advanceTime (0f);
 				float r0 = (float)random.NextDouble() + 0.5f;
