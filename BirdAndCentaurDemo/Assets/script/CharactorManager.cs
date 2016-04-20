@@ -21,7 +21,7 @@ namespace LastCastle
 	{
 		void Awake ()
 		{
-			Application.targetFrameRate = 200;
+			Application.targetFrameRate = 30;
 
 		}
 
@@ -50,7 +50,7 @@ namespace LastCastle
             
 			System.Random random = new System.Random();
             
-			for (int i=0; i<1; i++) {
+			for (int i=0; i<0; i++) {
 				for (int j=0; j<1; j++) {
 					Armature armature = factory.buildArmature ("centaur/charactor", "charactor_all");
 					armature.advanceTime (0f);
@@ -59,13 +59,16 @@ namespace LastCastle
 					float r2 = (float)random.NextDouble();
 					((armature.getDisplay() as UnityArmatureDisplay).Display as GameObject).transform.position = new Vector3((float)j+r0 * 50f, 1,  r2 * 50f);
 					WorldClock.clock.add (armature);
-					armature.getAnimation().gotoAndPlay ("run", -1, -1, 0);
+					armature.getAnimation().cacheAnimation("attack");
+					armature.getAnimation().play();
+					//armature.getAnimation().gotoAndPlay("run", -1, -1, -1);
+					//armature.getAnimation().gotoAndPlay ("run", -1, -1, 0);
 				}
 			}
             
             //add 20 bird into scene at some random positions.
-            for (int i=0; i<0; i++) {
-				for (int j=0; j<10; j++) {
+            for (int i=0; i<1; i++) {
+				for (int j=0; j<1; j++) {
 				Armature armature = factory.buildArmature ("bird/charactor", "charactor_all");
 				armature.advanceTime (0f);
 				float r0 = (float)random.NextDouble() + 0.5f;
@@ -73,7 +76,9 @@ namespace LastCastle
 				float r2 = (float)random.NextDouble();
 				((armature.getDisplay() as UnityArmatureDisplay).Display as GameObject).transform.position = new Vector3((float)j+r0*50f, (float)i*1f+r1*5f, r2*50f);
 				WorldClock.clock.add (armature);
-				armature._animation.gotoAndPlay ("fly", -1, -1, 0);
+				armature.getAnimation().cacheAnimation("fly");
+				armature.getAnimation().play();
+				//armature._animation.gotoAndPlay ("fly", -1, -1, 0);
 				}
 			}
          }
@@ -81,7 +86,7 @@ namespace LastCastle
 		// Update is called once per frame
 		void Update ()
 		{
-			WorldClock.clock.advanceTime (Time.deltaTime);
+			WorldClock.clock.advanceTime (Time.deltaTime / 10);
 		}
 
 	}

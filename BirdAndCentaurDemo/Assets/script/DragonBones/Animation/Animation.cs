@@ -268,10 +268,7 @@ namespace DragonBones
 			{
 				animationState.setCurrentTime(time);
 			}
-			
-			animationState.stop();
 			return animationState;
-
 		}
 		
 		public virtual void play()
@@ -289,17 +286,19 @@ namespace DragonBones
 			{
 				_isPlaying = true;
 			}
-
 		}
+
 		public virtual void stop()
 		{
 				_isPlaying = false;
 		}
+
 		public virtual void advanceTime(float passedTime)
 		{
 			if (!_isPlaying)
 			{
-				return;
+				if(!_lastAnimationState.isCaching)
+				   return;
 			}
 			
 			bool isFading = false;
@@ -340,7 +339,7 @@ namespace DragonBones
 
 		public virtual AnimationState getState(string name, int layer = 0)
 		{
-			for (int i = _animationStateList.Count; i >= 0; i-- )
+			for (int i = _animationStateList.Count - 1; i >= 0; i-- )
 			{
 				AnimationState animationState = _animationStateList[i];
 				
@@ -380,9 +379,8 @@ namespace DragonBones
 					}
 				}
 			}
-
-
 		}
+
 		public	virtual void updateAnimationStates()
         {
 		    for (int i = 0; i < _animationStateList.Count;  ++i)
@@ -391,35 +389,23 @@ namespace DragonBones
 			}
 		}
 
-        public void cacheAnimation(String name, int fps)
+        public void cacheAnimation(String name)
         {
-            AnimationData animationData = null;
-            for (int i = 0; i < _animationDataList.Count; ++i)
-            {
-                if (_animationDataList[i].name == name)
-                {
-                    animationData = _animationDataList[i];
-                    break;
-                }
-            }
-            if (animationData == null)
-            {
-                //assert (0);
-                //throw std::runtime_error("No animation data.");
-                return ;
-            }
+          
+			AnimationState state = gotoAndStop(name, 0);
+			//stop();
+			state.isCaching = true;
+			if(!TweenCache.GetInstance().hasCachedAnimation(_armature.name, name))
+			{
+			   int frameNum =  (int)(state.getTotalTime()*1000 * state.getClip().frameRate / (1000.0f / state.getClip().frameRate));
 
-            /*
-            foreach (var item in _lastAnimationState)
-            {
-
-            }
-            */
-            int frameNum = animationData.duration * 1000 / fps;
-            for (int i = 0; i < frameNum; i++)
-            {
-                this.advanceTime(1 / fps);
-            }
+               for (int i = 0; i < frameNum; i++)
+               {
+					this._armature.advanceTime(1 / (float)state.getClip().frameRate);
+               }
+			}
+			state.isCached = true;
+			state.isCaching = false;
         }
 
         public void uncacheAnimation(String name)

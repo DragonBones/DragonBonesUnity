@@ -9,6 +9,7 @@
 // ------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using Com.Viperstudio.Utils;
 
 namespace DragonBones
 {
@@ -59,7 +60,10 @@ namespace DragonBones
 		public float fadeOutTime;
 		public float weight;
 		public string name;
-		
+
+		public bool isCaching;
+		public bool isCached;
+
 	
 		private 	bool _isPlaying;
 		public bool _isComplete;
@@ -135,6 +139,11 @@ namespace DragonBones
 		public AnimationData getClip() 
 		{
 			return _clip;
+		}
+
+		public Armature getArmature()
+		{
+			return _armature;
 		}
 
 		public AnimationState setAdditiveBlending(bool value)
@@ -218,6 +227,10 @@ namespace DragonBones
 			
 			_timeScale = timeScale;
 			return this;
+		}
+		public List<TimelineState> GetTimelineStateList()
+		{
+			return _timelineStateList;
 		}
 
 		public void fadeIn(Armature armature, AnimationData clip, float fadeTotalTime, float timeScale, int playTimes, bool pausePlayhead)
@@ -598,6 +611,11 @@ namespace DragonBones
 			{
 				_time += passedTime;
 			}
+
+			if(this.isCaching)
+			{
+				_time += passedTime;
+			}
 			
 			bool startFlg = false;
 			bool completeFlg = false;
@@ -659,10 +677,11 @@ namespace DragonBones
 			// update timeline
 			_isComplete = isThisComplete;
 			float progress = _time * 1000.0f / (float)(_totalTime);
-            
-			
+
+
 			for (int i = 0; i < _timelineStateList.Count;  ++i)
 			{
+
 				_timelineStateList[i].update(progress);
 				_isComplete = _timelineStateList[i]._isComplete && _isComplete;
 			}

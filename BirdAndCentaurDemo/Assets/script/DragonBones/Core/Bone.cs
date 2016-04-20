@@ -27,7 +27,8 @@ namespace DragonBones
 		}
 		
 		public string displayController = "";
-		
+
+		public float progress;
 	    public bool _isColorChanged;
 	    public int _needUpdate;
 		
@@ -199,9 +200,18 @@ namespace DragonBones
 			}
 			else
 			{
+				if(!_timelineStateList[0]._animationState.isCaching)
+				   return;
+			}
+
+			if(_timelineStateList[0]._animationState.isCached)
+			{
+				
+				globalTransformMatrix = TweenCache.GetInstance().GetGlobalTransformByProgress(_timelineStateList[0]._animationState.getArmature().name, _timelineStateList[0]._animationState.name, _timelineStateList[0].name,    progress - (float)Math.Floor(progress));
+
 				return;
 			}
-			
+
 			blendingTimeline();
 
             global.ScaleX = (origin.ScaleX + _tween.ScaleX) * offset.ScaleX;
@@ -248,10 +258,15 @@ namespace DragonBones
 
           
 
-           globalTransformMatrix.A = offset.ScaleX * (float)Math.Cos(global.SkewY);
+            globalTransformMatrix.A = offset.ScaleX * (float)Math.Cos(global.SkewY);
 			globalTransformMatrix.B = offset.ScaleX * (float)Math.Sin(global.SkewY);
 			globalTransformMatrix.C = -offset.ScaleY * (float)Math.Sin(global.SkewX);
 			globalTransformMatrix.D = offset.ScaleY * (float)Math.Cos(global.SkewX);
+
+			if(_timelineStateList[0]._animationState.isCaching)
+			{
+				TweenCache.GetInstance().AddGlobalTransform(_timelineStateList[0]._animationState.getArmature().name, _timelineStateList[0]._animationState.name, _timelineStateList[0].name, globalTransformMatrix);
+			}
             
 		}
 
