@@ -77,7 +77,6 @@ namespace DragonBones
 		
 	
 		public	string name;
-        public bool isCached;
 	
 		public 	bool _blendEnabled;
 		public bool _isComplete;
