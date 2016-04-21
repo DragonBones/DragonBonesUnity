@@ -677,8 +677,7 @@ namespace DragonBones
 			// update timeline
 			_isComplete = isThisComplete;
 			float progress = _time * 1000.0f / (float)(_totalTime);
-
-
+           
 			for (int i = 0; i < _timelineStateList.Count;  ++i)
 			{
 

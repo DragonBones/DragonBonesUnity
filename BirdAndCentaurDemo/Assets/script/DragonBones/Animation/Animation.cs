@@ -393,19 +393,19 @@ namespace DragonBones
         {
           
 			AnimationState state = gotoAndStop(name, 0);
-			//stop();
-			state.isCaching = true;
-			if(!TweenCache.GetInstance().hasCachedAnimation(_armature.name, name))
-			{
-			   int frameNum =  (int)(state.getTotalTime()*1000 * state.getClip().frameRate / (1000.0f / state.getClip().frameRate));
 
-               for (int i = 0; i < frameNum; i++)
-               {
-					this._armature.advanceTime(1 / (float)state.getClip().frameRate);
-               }
-			}
-			state.isCached = true;
-			state.isCaching = false;
+            state.isCaching = true;
+            if (!TweenCache.GetInstance().hasCachedAnimation(_armature.name, name))
+            {
+                int frameNum =(int) (state.getTotalTime() * 1000 );
+
+                for (int i = 0; i < frameNum; i++)
+                {
+                    this._armature.advanceTime(1.0f  /frameNum);
+                }
+            }
+            state.isCached = true;
+            state.isCaching = false;
         }
 
         public void uncacheAnimation(String name)

@@ -170,21 +170,19 @@ namespace DragonBones
 			_transform.SkewX = DragonBones.formatRadian(_transform.SkewX);
 			_transform.SkewY = DragonBones.formatRadian(_transform.SkewY);
 		}
-		private int count = 0;
+		
 		public void update(float progress)
 		{
 			if (_updateState == UpdateState.UPDATE)
 			{
-				if(this._animationState.isCached)
-				{
-					_bone.progress = progress;
-					count++;
-					//if(count%2 == 1)
-					  _bone.invalidUpdate();
-					return;
-				}
+                if (this._animationState.isCached)
+                {
+                    _bone.progress = progress;
 
-				updateMultipleFrame(progress);
+                    _bone.invalidUpdate();
+                    return;
+                }
+                updateMultipleFrame(progress);
 			}
 			else if (_updateState == UpdateState.UPDATE_ONCE)
 			{
@@ -195,10 +193,15 @@ namespace DragonBones
 		
 		public void updateMultipleFrame(float progress)
 		{
-			progress /= _timeline.scale;
-			progress += _timeline.offset;
-            
-			int currentTime = (int)(_totalTime * progress);
+
+            if(!this._animationState.isCaching)
+            {
+                progress /= _timeline.scale;
+                progress += _timeline.offset;
+            }
+			
+
+            int currentTime = (int)(_totalTime * progress);
 			int currentPlayTimes = 0;
 			int playTimes = _animationState.getPlayTimes();
 			

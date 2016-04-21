@@ -606,13 +606,7 @@ namespace DragonBones
 			}
 		}
 
-
-
-
 	}
-
-
-
 
 }
 

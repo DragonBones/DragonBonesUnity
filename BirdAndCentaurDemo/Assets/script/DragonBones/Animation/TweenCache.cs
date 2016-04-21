@@ -40,6 +40,7 @@ namespace DragonBones
             Matrix matrix = new Matrix();
 			int timelineLength = amartureList[amartureName][animationName][timelineName].Count;
             int position = (int)(timelineLength * progress);
+           
 			List<Matrix> timeline = amartureList[amartureName][animationName][timelineName];
 			//if(timelineName == "man-head")
 			//	Debug.logger.Log(position + "  " + timeline[position].A+ "  " + timeline[position].B+ "  " + timeline[position].C+ "  " +  timeline[position].D);
