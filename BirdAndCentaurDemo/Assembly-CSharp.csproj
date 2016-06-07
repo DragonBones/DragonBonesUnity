@@ -1,49 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-	<ProductVersion>10.0.20506</ProductVersion>
-	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{3C0552F0-1CB3-783D-C3BC-BEC842AB708B}</ProjectGuid>
-	<OutputType>Library</OutputType>
-	<AppDesignerFolder>Properties</AppDesignerFolder>
-	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-CSharp</AssemblyName>
-	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-	<FileAlignment>512</FileAlignment>
-	<BaseDirectory>Assets</BaseDirectory>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{3C0552F0-1CB3-783D-C3BC-BEC842AB708B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-	<DebugSymbols>true</DebugSymbols>
-	<DebugType>full</DebugType>
-	<Optimize>false</Optimize>
-	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_OSX;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_2;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE</DefineConstants>
-	<ErrorReport>prompt</ErrorReport>
-	<WarningLevel>4</WarningLevel>
-	<NoWarn>0169</NoWarn>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_3_5;UNITY_5_3;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-	<DebugType>pdbonly</DebugType>
-	<Optimize>true</Optimize>
-	<OutputPath>Temp\bin\Release\</OutputPath>
-	<DefineConstants>TRACE</DefineConstants>
-	<ErrorReport>prompt</ErrorReport>
-	<WarningLevel>4</WarningLevel>
-	<NoWarn>0169</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-	<Reference Include="System" />
+    <Reference Include="System" />
     <Reference Include="System.XML" />
-	<Reference Include="System.Core" />
-	<Reference Include="System.Xml.Linq" />
-	<Reference Include="UnityEngine">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
-	</Reference>
-	<Reference Include="UnityEditor">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
-	</Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\script\CharactorManager.cs" />
@@ -52,61 +51,71 @@
      <Compile Include="Assets\script\Com\Viperstudio\Geom\ColorTransform.cs" />
      <Compile Include="Assets\script\Com\Viperstudio\Geom\Matrix.cs" />
      <Compile Include="Assets\script\Com\Viperstudio\Geom\Point.cs" />
+     <Compile Include="Assets\script\Com\Viperstudio\Geom\Rectangle.cs" />
+     <Compile Include="Assets\script\Com\Viperstudio\Geom\Transform.cs" />
      <Compile Include="Assets\script\Com\Viperstudio\Utils\FPS.cs" />
      <Compile Include="Assets\script\Com\Viperstudio\Utils\Json.cs" />
      <Compile Include="Assets\script\Com\Viperstudio\Utils\Logger.cs" />
      <Compile Include="Assets\script\Com\Viperstudio\Utils\Matrix.cs" />
+     <Compile Include="Assets\script\DragonBones\Animation\AimationFadeOutMode.cs" />
      <Compile Include="Assets\script\DragonBones\Animation\Animation.cs" />
      <Compile Include="Assets\script\DragonBones\Animation\AnimationState.cs" />
      <Compile Include="Assets\script\DragonBones\Animation\IAnimatable.cs" />
      <Compile Include="Assets\script\DragonBones\Animation\TimelineState.cs" />
+     <Compile Include="Assets\script\DragonBones\Animation\TweenCache.cs" />
      <Compile Include="Assets\script\DragonBones\Animation\WorldClock.cs" />
-     <Compile Include="Assets\script\DragonBones\Armature.cs" />
-     <Compile Include="Assets\script\DragonBones\AssemblyInfo.cs" />
-     <Compile Include="Assets\script\DragonBones\Bone.cs" />
+     <Compile Include="Assets\script\DragonBones\Core\Armature.cs" />
+     <Compile Include="Assets\script\DragonBones\Core\Bone.cs" />
      <Compile Include="Assets\script\DragonBones\Core\DBObject.cs" />
-     <Compile Include="Assets\script\DragonBones\Core\DragonBones.cs" />
+     <Compile Include="Assets\script\DragonBones\Core\Slot.cs" />
      <Compile Include="Assets\script\DragonBones\Display\IDisplayBridge.cs" />
      <Compile Include="Assets\script\DragonBones\Display\UnityArmatureDisplay.cs" />
      <Compile Include="Assets\script\DragonBones\Display\UnityBoneDisplay.cs" />
      <Compile Include="Assets\script\DragonBones\Display\UnityDisplayBridge.cs" />
-     <Compile Include="Assets\script\DragonBones\Events\AnimationEvent.cs" />
-     <Compile Include="Assets\script\DragonBones\Events\ArmatureEvent.cs" />
-     <Compile Include="Assets\script\DragonBones\Events\FrameEvent.cs" />
-     <Compile Include="Assets\script\DragonBones\Events\SoundEvent.cs" />
-     <Compile Include="Assets\script\DragonBones\Events\SoundEventManager.cs" />
-     <Compile Include="Assets\script\DragonBones\Factorys\BaseFactory.cs" />
-     <Compile Include="Assets\script\DragonBones\Factorys\UnityFactory.cs" />
+     <Compile Include="Assets\script\DragonBones\DragonBones.cs" />
+     <Compile Include="Assets\script\DragonBones\Events\EventData.cs" />
+     <Compile Include="Assets\script\DragonBones\Factories\BaseFactory.cs" />
+     <Compile Include="Assets\script\DragonBones\Factories\UnityFactory.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\AnimationData.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\ArmatureData.cs" />
-     <Compile Include="Assets\script\DragonBones\Objects\AtlasData.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\AtlasDataParser.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\BoneData.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\DBTransform.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\DataParser.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\DisplayData.cs" />
+     <Compile Include="Assets\script\DragonBones\Objects\DragonBonesData.cs" />
+     <Compile Include="Assets\script\DragonBones\Objects\EllipseData.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\Frame.cs" />
+     <Compile Include="Assets\script\DragonBones\Objects\IAreaData.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\ObjectDataParser.cs" />
-     <Compile Include="Assets\script\DragonBones\Objects\SkeletonData.cs" />
+     <Compile Include="Assets\script\DragonBones\Objects\RectangleData.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\SkinData.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\SlotData.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\Timeline.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\TransformFrame.cs" />
      <Compile Include="Assets\script\DragonBones\Objects\TransformTimeline.cs" />
-     <Compile Include="Assets\script\DragonBones\Objects\XMLDataParser.cs" />
-     <Compile Include="Assets\script\DragonBones\Slot.cs" />
+     <Compile Include="Assets\script\DragonBones\Textures\ITextureAtlas.cs" />
      <Compile Include="Assets\script\DragonBones\Textures\TextureAtlas.cs" />
+     <Compile Include="Assets\script\DragonBones\Textures\TextureAtlasData.cs" />
+     <Compile Include="Assets\script\DragonBones\Textures\TextureData.cs" />
      <Compile Include="Assets\script\DragonBones\Utils\BytesType.cs" />
      <Compile Include="Assets\script\DragonBones\Utils\ConstValues.cs" />
      <Compile Include="Assets\script\DragonBones\Utils\DBDataUtil.cs" />
      <Compile Include="Assets\script\DragonBones\Utils\TransformUtil.cs" />
      <Compile Include="Assets\script\DragonBones\Utils\parseOldXMLData.cs" />
+     <None Include="Assets\Resources\Transparent_DepthOrderUnlit.shader" />
      <None Include="Assets\Resources\texture.json.txt" />
      <None Include="Assets\Resources\skeleton.json.txt" />
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-	   Other similar extension points exist, see Microsoft.Common.targets.
+       Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">

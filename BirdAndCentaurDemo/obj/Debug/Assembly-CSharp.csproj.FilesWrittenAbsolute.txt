@@ -1,0 +1,17 @@
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/obj/Debug/Assembly-CSharp.dll
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/UnityEngine.dll
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/UnityEditor.dll
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/Mono.Cecil.dll
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/Unity.DataContract.dll
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/tomcomputer/GitLib/DragonBonesUnity/BirdAndCentaurDemo/Temp/bin/Debug/Mono.Cecil.Mdb.dll

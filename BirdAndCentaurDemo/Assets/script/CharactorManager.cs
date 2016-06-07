@@ -59,7 +59,7 @@ namespace LastCastle
 					float r2 = (float)random.NextDouble();
 					((armature.getDisplay() as UnityArmatureDisplay).Display as GameObject).transform.position = new Vector3((float)j+r0 * 50f, 1,  r2 * 50f);
 					WorldClock.clock.add (armature);
-					armature.getAnimation().gotoAndPlay ("run", -1, -1, 0);
+					armature.getAnimation().gotoAndPlay ("stand", -1, -1, 0);
 				}
 			}
             
